@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'CS 251 Project 1',
+               'Implementation-Version': version
+  }
+}
