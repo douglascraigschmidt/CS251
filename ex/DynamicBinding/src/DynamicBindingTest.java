@@ -61,6 +61,7 @@ public class DynamicBindingTest {
 	}
 	
 	public static void main(String[] args) {
+		/*
 		SimpleAbstractMap<String, Integer> map = makeMap(args[0]);
 
 		map.put("I", 1);
@@ -73,6 +74,9 @@ public class DynamicBindingTest {
 		     + s.getKey()
 		     + " value = "
 		     + s.getValue());
-
+		     */
+		Runnable r = () -> System.out.println ("this is a run() impl");
+		r.run();
+			
 	}
 }
