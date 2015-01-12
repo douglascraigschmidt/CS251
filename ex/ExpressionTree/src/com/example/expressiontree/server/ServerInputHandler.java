@@ -5,7 +5,7 @@ import com.example.expressiontree.client.Platform;
 /**
  * @class ServerInputHandler
  *
- * @brief 
+ * @brief @@ Mitchell, we need to get this hosted in a Servlet.
  * @see   
  */
 public class ServerInputHandler {
