@@ -133,7 +133,8 @@ public class CharArray implements Comparable<CharArray>,
      * an ordering for CharArray elements.
      * @return a negative value if the provided array is "less than" this array,
      * zero if the arrays are identical, and a positive value if the
-     * provided array is "greater than" this array.
+     * provided array is "greater than" this array. These arrays should be compred
+     * lexicographically.
      */
     @Override
     public int compareTo(CharArray s) {
@@ -142,8 +143,8 @@ public class CharArray implements Comparable<CharArray>,
         return 0;
     }
 
-    /** 
-     * Throws an exception if the index is out of bound. 
+    /**
+     * Throws an exception if the index is out of bound.
      */
     private void rangeCheck(int index) {
         // TODO - you fill in here

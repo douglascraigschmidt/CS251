@@ -7,6 +7,8 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+
 /**
  * Test the CharArray class.
  */
@@ -51,6 +53,26 @@ public class CharArrayTest {
         tmp.resize(5);
 
         tmp_c = new CharArray(tmp);
+
+        assertEquals(tmp.size(), tmp_c.size());
+        assertEquals(0, tmp.compareTo(tmp_c));
+        assertEquals(0, tmp_c.compareTo(tmp));
+        assertFalse(tmp.capacity() == tmp_c.capacity());
+    }
+
+    @Test
+    public void test_Clone() {
+        CharArray tmp = new CharArray(10, 'b');
+
+        CharArray tmp_c = (CharArray) tmp.clone ();
+
+        assertEquals(tmp.size(), tmp_c.size());
+        assertEquals(0, tmp.compareTo(tmp_c));
+        assertEquals(0, tmp_c.compareTo(tmp));
+
+        tmp.resize(5);
+
+        tmp_c = (CharArray) tmp.clone ();
 
         assertEquals(tmp.size(), tmp_c.size());
         assertEquals(0, tmp.compareTo(tmp_c));
@@ -120,5 +142,112 @@ public class CharArrayTest {
         assertEquals(2, tmp.size());
         assertEquals('a', tmp.get(0));
         assertEquals('\u0000', tmp.get(1));
+
+        tmp = new CharArray (3, 'a');
+        assertEquals(3, tmp.size());
+        assertEquals(3, tmp.capacity());
+        tmp.set (1, 'b');
+        tmp.set (2, 'c');
+        tmp.resize (0);
+        assertEquals(0, tmp.size());
+        assertEquals(3, tmp.capacity());
+        tmp.resize (1);
+        assertEquals(1, tmp.size());
+        assertEquals(3, tmp.capacity());
+        assertEquals('a', tmp.get(0));
+        tmp.resize (2);
+        assertEquals(2, tmp.size());
+        assertEquals(3, tmp.capacity());
+        assertEquals('a', tmp.get(0));
+        assertEquals('a', tmp.get(1));
+        tmp.resize (3);
+        assertEquals(3, tmp.size());
+        assertEquals(3, tmp.capacity());
+        assertEquals('a', tmp.get(0));
+        assertEquals('a', tmp.get(1));
+        assertEquals('a', tmp.get(2));
+    }
+
+    @Test
+    public void test_CompareTo () {
+        CharArray a = new CharArray (0, 'a');
+        CharArray b = new CharArray (0, 'b');
+
+        assertEquals (0, a.compareTo (b));
+        assertEquals (0, a.compareTo (a));
+        assertEquals (0, b.compareTo (b));
+
+        a.resize (1);
+
+        assertTrue (a.compareTo (b) != 0);
+        assertTrue (b.compareTo (a) != 0);
+
+        b.resize(1);
+
+        assertTrue (a.compareTo(b) != 0);
+        assertTrue (b.compareTo(a) != 0);
+        assertTrue (a.compareTo(b) < 0);
+        assertTrue (b.compareTo(a) > 0);
+
+        b.resize (2);
+
+        assertTrue (a.compareTo(b) != 0);
+        assertTrue (b.compareTo(a) != 0);
+        assertTrue (a.compareTo(b) < 0);
+        assertTrue (b.compareTo(a) > 0);
+
+        CharArray bba = (CharArray) b.clone ();
+
+        assertEquals (0, b.compareTo (bba));
+
+        bba.resize (3);
+        bba.set (2, 'a');
+
+        assertTrue (b.compareTo (bba) < 0);
+        assertTrue (bba.compareTo (b) > 0);
+
+        b.resize (10);
+        b.resize (3);
+        b.set (2, 'a');
+
+        assertTrue (b.compareTo (bba) == 0);
+        assertTrue (bba.compareTo (b) == 0);
+    }
+
+    @Test
+    public void test_Iterator () {
+        CharArray a = new CharArray (0, 'a');
+
+        Iterator<Character> it = a.iterator ();
+
+        assertTrue (it.hasNext () == false);
+
+        a.resize (1);
+
+        it = a.iterator ();
+        assertTrue (it.hasNext ());
+        assertTrue (it.next () == 'a');
+        assertTrue (it.hasNext () == false);
+
+        a.resize (2);
+
+        it = a.iterator ();
+        assertTrue (it.hasNext ());
+        assertTrue (it.next () == 'a');
+        assertTrue (it.hasNext ());
+        assertTrue (it.next () == 'a');
+        assertTrue (it.hasNext () == false);
+
+        a.set (1, 'b');
+
+        it = a.iterator ();
+        assertTrue (it.hasNext ());
+        assertTrue (it.next () == 'a');
+        assertTrue (it.hasNext ());
+        assertTrue (it.next () == 'b');
+        assertTrue (it.hasNext () == false);
+
+        exception.expect(ArrayIndexOutOfBoundsException.class);
+        it.next ();
     }
 }
