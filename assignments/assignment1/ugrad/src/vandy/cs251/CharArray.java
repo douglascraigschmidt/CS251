@@ -131,9 +131,9 @@ public class CharArray implements Comparable<CharArray>,
      * <p>
      * This is a requirement of the Comparable interface.  It is used to provide
      * an ordering for CharArray elements.
-     * @return a negative value if the provided array is "less than" this array,
+     * @return a negative value if the provided array is "greater than" this array,
      * zero if the arrays are identical, and a positive value if the
-     * provided array is "greater than" this array. These arrays should be compred
+     * provided array is "less than" this array. These arrays should be compred
      * lexicographically.
      */
     @Override
