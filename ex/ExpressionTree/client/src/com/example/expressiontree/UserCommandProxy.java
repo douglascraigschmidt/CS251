@@ -7,7 +7,7 @@ import retrofit.RestAdapter;
  * @class UserCommandProxy
  *
  * @brief Acts as a proxy between this client and the server
- * 		that actually hosts the expression tree code.
+ *        that actually hosts the expression tree code.
  */
 public class UserCommandProxy {
     private String mUserCommandString;
@@ -16,16 +16,17 @@ public class UserCommandProxy {
         mUserCommandString = userCommandString;
     }
 
-    /** Runs the command by passing  */
+    /** Runs the user command on the server.  */
     public void execute() throws Exception {
-    	// @@ Right now we're just passing the command string to the server.
-    	// More complexities to follow...
+    	// @@ Right now we're just passing the command string to the
+    	// server.  More complexities to follow...
     	
-    	RestAdapter restAdapter = new RestAdapter.Builder()
-        .setEndpoint("http://localhost:8080/")
-        .build();
+        // @@ Mitchell, can you please (briefly) document this code?
+    	RestAdapter restAdapter =
+            new RestAdapter.Builder().setEndpoint("http://localhost:8080/").build();
 
-    	ExpressionTreeService service = restAdapter.create(ExpressionTreeService.class);
+    	ExpressionTreeService service =
+            restAdapter.create(ExpressionTreeService.class);
     	
     	service.execute(mUserCommandString);
         

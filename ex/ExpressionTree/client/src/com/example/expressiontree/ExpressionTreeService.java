@@ -4,12 +4,13 @@ import retrofit.http.GET;
 import retrofit.http.Query;
 
 /**
- * A Retrofit interface for the server hosting our ExpressionTree code.
+ * A Retrofit interface for the server hosting our ExpressionTree
+ * code.
  * 
  * @author Mitchell
  *
  */
 public interface ExpressionTreeService {
-	@GET("/ExpressionTreeServer")
-	ServerResult execute(@Query("input") String input);
+    @GET("/ExpressionTreeServer")
+    ServerResult execute(@Query("input") String input);
 }
