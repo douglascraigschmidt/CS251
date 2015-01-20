@@ -44,7 +44,7 @@ public abstract class ClientInputHandler {
      * ClientInputHandler, i.e., @a VerboseModeClientInputHandler or @a *
      * SuccinctModeClientInputHandler. 
      */
-    private static ClientInputHandler makeHandler(boolean verbose,
+    public static ClientInputHandler makeHandler(boolean verbose,
                                                   Object input,
                                                   Object output,
                                                   Object activity) {
