@@ -20,7 +20,6 @@ public class MapLocationFromContacts extends Activity {
      */
     private static final int PICK_CONTACT_REQUEST = 0;
 
-
     /**
      * Debugging tag used by the Android logger.
      */
@@ -161,7 +160,7 @@ public class MapLocationFromContacts extends Activity {
 
             // Extract the address from the contact record indicated
             // by the Uri associated with the Intent.
-            String address = getAddressFromContact(data.getData());
+            final String address = getAddressFromContact(data.getData());
 
             // Launch the activity by sending an intent.  Android will
             // choose the right one or let the user choose if more than
