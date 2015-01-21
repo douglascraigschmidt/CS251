@@ -7,7 +7,7 @@ import java.util.Iterator;
 /**
  * Provides a generic dynamically-(re)sized array abstraction.
  */
-public class Array<T extends Cloneable &Comparable>
+public class Array<T extends Comparable>
              implements Comparable<Array<T>>,
                         Iterable<T>,
                         Cloneable {
