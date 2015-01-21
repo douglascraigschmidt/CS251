@@ -58,6 +58,18 @@ public class CharArrayTest {
         assertEquals(0, tmp.compareTo(tmp_c));
         assertEquals(0, tmp_c.compareTo(tmp));
         assertFalse(tmp.capacity() == tmp_c.capacity());
+
+        tmp_c.resize (11);
+
+        assertEquals('b', tmp_c.get(10));
+
+        tmp_c.resize (2);
+
+        tmp = new CharArray(tmp_c);
+        assertEquals(tmp.size(), tmp_c.size());
+        assertEquals(0, tmp.compareTo(tmp_c));
+        assertEquals(0, tmp_c.compareTo(tmp));
+        assertEquals(2, tmp.capacity());
     }
 
     @Test
@@ -119,6 +131,22 @@ public class CharArrayTest {
         CharArray tmp = new CharArray(1);
         exception.expect(ArrayIndexOutOfBoundsException.class);
         tmp.set(-1, 'a');
+    }
+
+    @Test
+    public void test_SetExceptionResized() {
+        CharArray tmp = new CharArray(10);
+        tmp.resize (1);
+        exception.expect(ArrayIndexOutOfBoundsException.class);
+        tmp.set(1, 'a');
+    }
+
+    @Test
+    public void test_GetExceptionResized() {
+        CharArray tmp = new CharArray(10);
+        tmp.resize (1);
+        exception.expect(ArrayIndexOutOfBoundsException.class);
+        tmp.get(1);
     }
 
     @Test
@@ -212,6 +240,34 @@ public class CharArrayTest {
 
         assertTrue (b.compareTo (bba) == 0);
         assertTrue (bba.compareTo (b) == 0);
+
+        a = new CharArray (1, 'a');
+        b = new CharArray (2, 'a');
+
+        assertTrue (a.compareTo (b) < 0);
+        assertTrue (b.compareTo (a) > 0);
+
+        b = new CharArray (2, 'a');
+        b.set (1, 'b');
+
+        assertTrue (a.compareTo (b) < 0);
+        assertTrue (b.compareTo (a) > 0);
+
+        a.resize (3);
+        a.set (1, 'b');
+        a.set (2, 'c');
+
+        b = (CharArray) a.clone ();
+        b.resize (4);
+        b.set (3, 'd');
+
+        assertTrue (a.compareTo (b) < 0);
+        assertTrue (b.compareTo (a) > 0);
+
+        a.set (1, 'z');
+
+        assertTrue (a.compareTo (b) > 0);
+        assertTrue (b.compareTo (a) < 0);
     }
 
     @Test
