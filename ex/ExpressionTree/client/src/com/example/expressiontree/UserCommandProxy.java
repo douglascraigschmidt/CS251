@@ -4,7 +4,6 @@ import java.net.URLEncoder;
 
 import retrofit.RestAdapter;
 
-
 /**
  * @class UserCommandProxy
  *
@@ -12,13 +11,21 @@ import retrofit.RestAdapter;
  *        that actually hosts the expression tree code.
  */
 public class UserCommandProxy {
+    /**
+     * Command string created by the user.
+     */
     private String mUserCommandString;
 
+    /**
+     * Constructor sets the user command string.
+     */
     public UserCommandProxy(String userCommandString) {
         mUserCommandString = userCommandString;
     }
 
-    /** Runs the user command on the server.  */
+    /** 
+     * Runs the user command on the server.  
+     */
     public void execute() throws Exception {
     	// @@ Right now we're just passing the command string to the
     	// server.  More complexities to follow...
@@ -34,17 +41,17 @@ public class UserCommandProxy {
             service.execute(URLEncoder.encode(mUserCommandString,
                                               "UTF-8"));
         
-    	if (!response.getResult().toLowerCase().equals("ok")) {
+    	if (!response.getResult().toLowerCase().equals("ok")) 
             Platform.instance().outputLine("Exception from server: " 
                                            + response.getResult());
-    	}
-    	else {
+    	else 
             PlatformProxyInterpreter.interpret(Platform.instance(),
                                                response);
-    	}
     }
 	
-    /** Print the valid commands available to users. */
+    /** 
+     * Print the valid commands available to users. 
+     */
     public void printValidCommands(boolean verboseField) {
     }
 }

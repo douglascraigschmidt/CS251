@@ -13,13 +13,19 @@ import java.util.*;
  *        command-line option processing.
  */
 public class Options {
-    /** Are we running in verbose mode or not? */
+    /** 
+     * Are we running in verbose mode or not? 
+     */
     private boolean verbose = false;
 
-    /** The singleton @a Options instance. */
+    /**
+     * The singleton @a Options instance. 
+     */
     private static Options uniqueInstance = null;
 
-    /** Method to return the one and only singleton uniqueInstance. */
+    /**
+     * Method to return the one and only singleton uniqueInstance. 
+     */
     public static Options instance() {
         if (uniqueInstance == null)
             uniqueInstance = new Options();
@@ -27,7 +33,9 @@ public class Options {
         return uniqueInstance;
     }
 
-    /** Run the program in verbose mode. */
+    /** 
+     * Run the program in verbose mode. 
+     */
     public boolean verbose() {
         return this.verbose;
     }
@@ -48,7 +56,9 @@ public class Options {
         return true;
     }
 
-    /** Print out usage and default values. */
+    /** 
+     * Print out usage and default values. 
+     */
     public void printUsage() {
         Platform platform = Platform.instance();
         platform.errorLog("Options",

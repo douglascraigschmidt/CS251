@@ -68,7 +68,7 @@ public class ServerInputHandler extends HttpServlet {
             response.getWriter().println("{result: \"Malformed Request\"}");
         }
         else {
-            // URL decode the string
+            // URL decode the string.
             userInputCommand =
                 URLDecoder.decode(userInputCommand,
                                   "UTF-8");

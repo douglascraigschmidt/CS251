@@ -9,6 +9,8 @@ import java.util.HashMap;
  *        designated @a Platform implementation at runtime.
  */
 public class PlatformFactory {
+    // @@ Doug, refactor this class to use the latest variant of PlatformFactory.
+
     /** 
      * This interface uses the Command pattern to create @a Platform
      * implementations at runtime.

@@ -6,18 +6,22 @@ import java.util.List;
 /**
  * @class PlatformProxy
  * 
- * @brief Handles marshalling calls to the Platform interface into text values
- *        that can be sent across a server connection. Uses JSON notation to
- *        allow easier parsing on the client side.
+ * @brief Handles marshalling calls to the Platform interface into
+ *        text values that can be sent across a server
+ *        connection. Uses JSON notation to allow easier parsing on
+ *        the client side.
  * 
- *        As an example, if a user calls outputLine("test") and outputMenu("1",
- *        "2" "3"), this class would generate a JSON object that looks like the
- *        following:
+ *        As an example, if a user calls outputLine("test") and
+ *        outputMenu("1", "2" "3"), this class would generate a JSON
+ *        object that looks like the following:
  * 
- * 		  {result: "ok", response: [ {call: "outputLine", params: ["test"] }, 
- * 									 {call: "outputMenu", params: ["1", "2", "3"] } ] }
+ *        {result: "ok", response: [ {call: "outputLine", params: ["test"] }, 
+ * 		           {call: "outputMenu", params: ["1", "2", "3"] } ] }
  */
 public class PlatformProxy extends Platform {
+    /**
+     * @@ Mitchell, please document this field.
+     */
     List<String> callObjects =
         new ArrayList<String>();
 
@@ -38,7 +42,7 @@ public class PlatformProxy extends Platform {
 
         sb.append("] }");
 		
-        // Restart collecting call objects
+        // Restart collecting call objects.
         callObjects.clear();
 		
         return sb.toString();
@@ -64,59 +68,99 @@ public class PlatformProxy extends Platform {
         callObjects.add(sb.toString());
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public String outputLine(String line) {
         appendCallObject("outputLine", line);
         return null;
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public String retrieveInput(boolean verbose) {
         // This method will not be used by the server.
         return null;
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public String outputString(String input) {
         appendCallObject("outputString", input);
         return null;
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public String platformName() {
         return "Proxy";
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public boolean isCommandLinePlatform() {
         // This method will not be used by the server.
         return false; 
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
-    public void outputMenu(String numeral, String option, String selection) {
-        appendCallObject("outputMenu", numeral, option, selection);
+    public void outputMenu(String numeral,
+                           String option,
+                           String selection) {
+        appendCallObject("outputMenu",
+                         numeral,
+                         option,
+                         selection);
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public void enableOption(String option) {
-        appendCallObject("enableOption", option);
+        appendCallObject("enableOption",
+                         option);
 
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public void disableAll(boolean verbose) {
-        appendCallObject("disableAll", Boolean.toString(verbose));
+        appendCallObject("disableAll",
+                         Boolean.toString(verbose));
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public String addString(String Input) {
-        appendCallObject("addString", Input);
+        appendCallObject("addString",
+                         Input);
         return null;
     }
 
+    /**
+     * @@ Mitchell, please document this method.
+     */
     @Override
     public void errorLog(String javaFile, String errorMessage) {
-        appendCallObject("errorLog", javaFile, errorMessage);
+        appendCallObject("errorLog",
+                         javaFile,
+                         errorMessage);
     }
 }

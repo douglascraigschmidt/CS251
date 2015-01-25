@@ -8,7 +8,6 @@ import retrofit.http.Query;
  * code.
  * 
  * @author Mitchell
- *
  */
 public interface ExpressionTreeService {
     @GET("/ExpressionTreeServer")

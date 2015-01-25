@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 public class PlatformProxyInterpreter {
     /**
      * Interprets the given server response and makes the
-     * corresponding calls to Platform.
+     * corresponding calls to Platform singletone.
      */
     public static void interpret(Platform platform,
                                  ServerResponse response) {
