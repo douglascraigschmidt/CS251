@@ -12,5 +12,5 @@ import retrofit.http.Query;
  */
 public interface ExpressionTreeService {
     @GET("/ExpressionTreeServer")
-    ServerResult execute(@Query("input") String input);
+    ServerResponse execute(@Query("input") String input);
 }

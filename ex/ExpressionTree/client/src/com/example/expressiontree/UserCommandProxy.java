@@ -1,5 +1,7 @@
 package com.example.expressiontree;
 
+import java.net.URLEncoder;
+
 import retrofit.RestAdapter;
 
 
@@ -28,8 +30,14 @@ public class UserCommandProxy {
     	ExpressionTreeService service =
             restAdapter.create(ExpressionTreeService.class);
     	
-    	service.execute(mUserCommandString);
+    	ServerResponse response = service.execute(URLEncoder.encode(mUserCommandString, "UTF-8"));
         
+    	if (!response.getResult().toLowerCase().equals("ok")) {
+    		Platform.instance().outputLine("Exception from server: " + response.getResult());
+    	}
+    	else {
+    		PlatformProxyInterpreter.interpret(Platform.instance(), response);
+    	}
     }
 	
     /** Print the valid commands available to users. */
