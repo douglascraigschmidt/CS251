@@ -16,104 +16,107 @@ import java.util.List;
  * 
  * 		  {result: "ok", response: [ {call: "outputLine", params: ["test"] }, 
  * 									 {call: "outputMenu", params: ["1", "2", "3"] } ] }
- *
  */
 public class PlatformProxy extends Platform {
+    List<String> callObjects =
+        new ArrayList<String>();
 
-	List<String> callObjects = new ArrayList<String>();
-
-	// Returns the JSON object that was built since reap was last called
-	// or since the Platform was initialized.
-	public String reap() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{result: \"ok\", platformCalls: [");
+    /**
+     * Returns the JSON object that was built since reap was last
+     * called or since the Platform was initialized.
+     */
+    public String reap() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{result: \"ok\", platformCalls: [");
 		
-		for (int i = 0; i < callObjects.size(); ++i) {
-			if (i != 0)
-				sb.append(", ");
+        for (int i = 0; i < callObjects.size(); ++i) {
+            if (i != 0)
+                sb.append(", ");
 			
-			sb.append(callObjects.get(i));
-		}
+            sb.append(callObjects.get(i));
+        }
 
-		sb.append("] }");
+        sb.append("] }");
 		
-		// Restart collecting call objects
-		callObjects.clear();
+        // Restart collecting call objects
+        callObjects.clear();
 		
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	// Takes a function name and several params and appends it to the JSON object.
-	private void appendCallObject(String fname, String ... params) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{fname: \"" + fname + "\", params: [");
-		for (int i = 0 ; i < params.length; ++i) {
-			if (i != 0)
-				sb.append(", ");
+    /**
+     * Takes a function name and several params and appends it to the
+     * JSON object.
+     */
+    private void appendCallObject(String fname,
+                                  String ... params) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{fname: \"" + fname + "\", params: [");
+        for (int i = 0 ; i < params.length; ++i) {
+            if (i != 0)
+                sb.append(", ");
 
-			sb.append("\"" + params[i] + "\"");
-		}
+            sb.append("\"" + params[i] + "\"");
+        }
 		
-		sb.append("] }");
+        sb.append("] }");
 		
-		callObjects.add(sb.toString());
-	}
+        callObjects.add(sb.toString());
+    }
 
-	@Override
-	public String outputLine(String line) {
-		appendCallObject("outputLine", line);
-		return null;
-	}
+    @Override
+    public String outputLine(String line) {
+        appendCallObject("outputLine", line);
+        return null;
+    }
 
-	@Override
-	public String retrieveInput(boolean verbose) {
-		// This method will not be used by the server.
-		return null;
-	}
+    @Override
+    public String retrieveInput(boolean verbose) {
+        // This method will not be used by the server.
+        return null;
+    }
 
-	@Override
-	public String outputString(String input) {
-		appendCallObject("outputString", input);
-		return null;
-	}
+    @Override
+    public String outputString(String input) {
+        appendCallObject("outputString", input);
+        return null;
+    }
 
-	@Override
-	public String platformName() {
-		return "Proxy";
-	}
+    @Override
+    public String platformName() {
+        return "Proxy";
+    }
 
-	@Override
-	public boolean isCommandLinePlatform() {
-		// This method will not be used by the server.
-		return false; 
-	}
+    @Override
+    public boolean isCommandLinePlatform() {
+        // This method will not be used by the server.
+        return false; 
+    }
 
-	@Override
-	public void outputMenu(String numeral, String option, String selection) {
-		appendCallObject("outputMenu", numeral, option, selection);
-	}
+    @Override
+    public void outputMenu(String numeral, String option, String selection) {
+        appendCallObject("outputMenu", numeral, option, selection);
+    }
 
-	@Override
-	public void enableOption(String option) {
-		appendCallObject("enableOption", option);
+    @Override
+    public void enableOption(String option) {
+        appendCallObject("enableOption", option);
 
-	}
+    }
 
-	@Override
-	public void disableAll(boolean verbose) {
-		appendCallObject("disableAll", Boolean.toString(verbose));
-	}
+    @Override
+    public void disableAll(boolean verbose) {
+        appendCallObject("disableAll", Boolean.toString(verbose));
+    }
 
-	@Override
-	public String addString(String Input) {
-		appendCallObject("addString", Input);
-		return null;
-	}
+    @Override
+    public String addString(String Input) {
+        appendCallObject("addString", Input);
+        return null;
+    }
 
-	@Override
-	public void errorLog(String javaFile, String errorMessage) {
-		appendCallObject("errorLog", javaFile, errorMessage);
-
-	}
-
+    @Override
+    public void errorLog(String javaFile, String errorMessage) {
+        appendCallObject("errorLog", javaFile, errorMessage);
+    }
 }

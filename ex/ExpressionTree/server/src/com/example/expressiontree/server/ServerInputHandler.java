@@ -59,20 +59,23 @@ public class ServerInputHandler extends HttpServlet {
      * commands.
      */
     @Override
-    protected void doGet(HttpServletRequest request, 
+    protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         // Retrieves input from user.
         String userInputCommand = request.getParameter("input");
         
         if (userInputCommand == null) {
-        	response.getWriter().println("{result: \"Malformed Request\"}");
+            response.getWriter().println("{result: \"Malformed Request\"}");
         }
         else {
-        	// URL decode the string
-        	userInputCommand = URLDecoder.decode(userInputCommand, "UTF-8");
+            // URL decode the string
+            userInputCommand =
+                URLDecoder.decode(userInputCommand,
+                                  "UTF-8");
         	
             // Call hook method to make a command based on user input.
-            UserCommand command = makeUserCommand(userInputCommand);
+            UserCommand command = 
+                makeUserCommand(userInputCommand);
 	          
             // Call a hook method to execute the command.
             try {
@@ -84,13 +87,15 @@ public class ServerInputHandler extends HttpServlet {
             	return;
             }
                
-           response.getWriter().println(((PlatformProxy) Platform.instance()).reap());
-       }
+            response.getWriter().println(((PlatformProxy) Platform.instance()).reap());
+        }
         
-       response.flushBuffer();
+        response.flushBuffer();
     }
 
-    // This hook method makes a command based on the user input.
+    /**
+     * This hook method makes a command based on the user input.
+     */
     private UserCommand makeUserCommand(String userInputCommand) {
         return mUserCommandFactory.makeUserCommand(userInputCommand);
     }

@@ -30,13 +30,17 @@ public class UserCommandProxy {
     	ExpressionTreeService service =
             restAdapter.create(ExpressionTreeService.class);
     	
-    	ServerResponse response = service.execute(URLEncoder.encode(mUserCommandString, "UTF-8"));
+    	ServerResponse response =
+            service.execute(URLEncoder.encode(mUserCommandString,
+                                              "UTF-8"));
         
     	if (!response.getResult().toLowerCase().equals("ok")) {
-    		Platform.instance().outputLine("Exception from server: " + response.getResult());
+            Platform.instance().outputLine("Exception from server: " 
+                                           + response.getResult());
     	}
     	else {
-    		PlatformProxyInterpreter.interpret(Platform.instance(), response);
+            PlatformProxyInterpreter.interpret(Platform.instance(),
+                                               response);
     	}
     }
 	
