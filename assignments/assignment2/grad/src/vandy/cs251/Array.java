@@ -132,9 +132,10 @@ public class Array<T extends Comparable>
     }
 
     /**
-     * Removes the element at the specified position in this Vector.
-     * Shifts any subsequent elements to the left (subtracts one from their
-     * indices).  Returns the element that was removed from the Array.
+     * Removes the element at the specified position in this Array.
+     * Shifts any subsequent elements to the left (subtracts one from
+     * their indices).  Returns the element that was removed from the
+     * Array.
      *
      * @throws ArrayIndexOutOfBoundsException if the index is out of range.
      * @param index the index of the element to remove
