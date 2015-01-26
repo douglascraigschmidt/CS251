@@ -175,14 +175,17 @@ public class Array<T extends Comparable>
         // Current position in the Array (defaults to 0).
         // TODO - you fill in here.
 
+        // Index of last element returned; -1 if no such element.
+        // TODO - you fill in here.
+
         /** 
          * @return True if the iteration has more elements that
          * haven't been iterated through yet, else false.
          */
         @Override
         public boolean hasNext() {
-        // TODO - you fill in here (replace false with proper boolean
-        // expression).
+            // TODO - you fill in here (replace false with proper boolean
+            // expression).
             return false;
         }
 
@@ -199,6 +202,8 @@ public class Array<T extends Comparable>
          * Removes from the underlying collection the last element
          * returned by this iterator. This method can be called only
          * once per call to next().
+         * @throws IllegalStateException if no last element was
+         * returned by the iterator.
          */
         @Override
         public void remove() {
