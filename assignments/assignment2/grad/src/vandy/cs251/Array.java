@@ -226,6 +226,7 @@ public class Array<T extends Comparable>
 
         /**
          * Constructs a Spliterator that covers the entire range of
+         * the Array from beginning to end.
          */
         public ArraySpliterator() {
             // TODO - you fill in here
@@ -267,7 +268,10 @@ public class Array<T extends Comparable>
             return null;
         }
 
-        /** Estimates the size of the partiiton covered by this spliterator */
+        /** 
+         * Estimates the size of the partition covered by this
+         * spliterator.
+         */
         @Override
         public long estimateSize() {
             // TODO - you fill in here (replace return 0 with proper
