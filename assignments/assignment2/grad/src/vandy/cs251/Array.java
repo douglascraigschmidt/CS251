@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 /**
  * Provides a generic dynamically-(re)sized array abstraction.
  */
-public class Array<T extends Comparable>
+public class Array<T extends Comparable<T>>
              implements Comparable<Array<T>>,
                         Iterable<T>,
                         Cloneable {
@@ -132,9 +132,10 @@ public class Array<T extends Comparable>
     }
 
     /**
-     * Removes the element at the specified position in this Vector.
-     * Shifts any subsequent elements to the left (subtracts one from their
-     * indices).  Returns the element that was removed from the Array.
+     * Removes the element at the specified position in this Array.
+     * Shifts any subsequent elements to the left (subtracts one from
+     * their indices).  Returns the element that was removed from the
+     * Array.
      *
      * @throws ArrayIndexOutOfBoundsException if the index is out of range.
      * @param index the index of the element to remove
@@ -157,7 +158,7 @@ public class Array<T extends Comparable>
      * provided array is "less than" this array.
      */
     @Override
-    public int compareTo(Array s) {
+    public int compareTo(Array<T> s) {
         // TODO - you fill in here (replace 0 with proper return
         // value).
         return 0;
@@ -175,14 +176,17 @@ public class Array<T extends Comparable>
         // Current position in the Array (defaults to 0).
         // TODO - you fill in here.
 
+        // Index of last element returned; -1 if no such element.
+        // TODO - you fill in here.
+
         /** 
          * @return True if the iteration has more elements that
          * haven't been iterated through yet, else false.
          */
         @Override
         public boolean hasNext() {
-        // TODO - you fill in here (replace false with proper boolean
-        // expression).
+            // TODO - you fill in here (replace false with proper boolean
+            // expression).
             return false;
         }
 
@@ -199,6 +203,8 @@ public class Array<T extends Comparable>
          * Removes from the underlying collection the last element
          * returned by this iterator. This method can be called only
          * once per call to next().
+         * @throws IllegalStateException if no last element was
+         * returned by the iterator.
          */
         @Override
         public void remove() {
@@ -220,6 +226,7 @@ public class Array<T extends Comparable>
 
         /**
          * Constructs a Spliterator that covers the entire range of
+         * the Array from beginning to end.
          */
         public ArraySpliterator() {
             // TODO - you fill in here
@@ -257,11 +264,14 @@ public class Array<T extends Comparable>
         @Override
         public ArraySpliterator trySplit() {
             // TODO - you fill in here (replace return null with
-            // proper return values(s).
+            // proper return values(s)).
             return null;
         }
 
-        /** Estimates the size of the partiiton covered by this spliterator */
+        /** 
+         * Estimates the size of the partition covered by this
+         * spliterator.
+         */
         @Override
         public long estimateSize() {
             // TODO - you fill in here (replace return 0 with proper

@@ -4,7 +4,10 @@ import vandy.cs251.Array;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
-
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.ListIterator;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
@@ -308,4 +311,173 @@ public class ArrayCharacterTest {
         exception.expect(ArrayIndexOutOfBoundsException.class);
         it.next ();
     }
+
+  @Test
+  public void test_IteratorRemove () {
+    Array<Character> a = new Array<Character> (2, 'a');
+    a.set (1, 'b');
+
+    Iterator<Character> it = a.iterator ();
+
+    char c = it.next ();
+    assertEquals ('a', c);
+
+    it.remove ();
+
+    assertEquals (1, a.size ());
+    assertEquals ('b', (char) a.get (0));
+
+    c = it.next ();
+
+    assertEquals ('b', c);
+
+    it.remove ();
+
+    assertEquals (0, a.size ());
+
+    a.resize (2);
+
+    it = a.iterator ();
+    c = it.next ();
+    it.remove ();
+
+    exception.expect(IllegalStateException.class);
+    it.remove ();
+  }
+
+  @Test
+  public void test_IteratorRemoveEmpty () {
+    Array<Character> a = new Array<Character> (2, 'a');
+    Iterator<Character> it = a.iterator ();
+    exception.expect(IllegalStateException.class);
+    it.remove ();
+  }
+
+  @Test
+  public void test_Spliterator () {
+    Array<Integer> a = new Array<Integer> (10);
+
+    for (int i = 0; i < 10; ++i) {
+      a.set (i, i);
+    }
+
+    Spliterator<Integer> it = a.spliterator ();
+
+    assertEquals (Spliterator.IMMUTABLE |
+                  Spliterator.NONNULL |
+                  Spliterator.ORDERED |
+                  Spliterator.SIZED |
+                  Spliterator.SUBSIZED, it.characteristics ());
+    assertEquals (10, it.estimateSize ());
+
+    Consumer<Integer> act = new Consumer<Integer> () {
+        private int mSum = 0;
+
+        @Override
+        public void accept (Integer item) {
+          mSum += item;
+        }
+
+        public int sum () {
+          return mSum;
+        }
+
+        public void reset () {
+          mSum = 0;
+        }
+      };
+
+    int count = 0;
+
+    while (it.tryAdvance (act)) {
+      ++count;
+    }
+
+    assertEquals (10, count);
+    try {
+      assertEquals (45, act.getClass().getMethod("sum").invoke (act));
+
+      act.getClass().getMethod("reset").invoke (act);
+    } catch (Exception e) { fail ("should never happen"); }
+
+    it = a.spliterator ();
+    assertEquals (10, it.estimateSize ());
+
+    Spliterator<Integer> split = it.trySplit (), split2 = split.trySplit ();
+
+    assertEquals (5, it.estimateSize ());
+    assertEquals (3, split.estimateSize ());
+    assertEquals (2, split2.estimateSize ());
+
+    count = 0;
+
+    while (it.tryAdvance (act)) {
+      ++count;
+    }
+
+    while (split.tryAdvance (act)) {
+      ++count;
+    }
+
+    while (split2.tryAdvance (act)) {
+      ++count;
+    }
+
+    assertEquals (10, count);
+    try {
+      assertEquals (45, act.getClass().getMethod("sum").invoke (act));
+      act.getClass().getMethod("reset").invoke (act);
+    } catch (Exception e) { fail ("should never happen"); }
+
+    it = a.spliterator ();
+    assertNotNull (split = it.trySplit ());
+    assertNotNull (it.trySplit ());
+    assertNotNull (it.trySplit ());
+    assertNotNull (it.trySplit ());
+    assertNull (it.trySplit ());
+    assertNotNull (split.trySplit ());
+    assertNotNull (split.trySplit ());
+    assertNotNull (split.trySplit ());
+    assertNull (split.trySplit ());
+
+    ArrayList<Spliterator<Integer>> splits = new ArrayList<Spliterator<Integer>> ();
+    splits.add (a.spliterator ());
+
+    ListIterator<Spliterator<Integer>> splits_it = splits.listIterator ();
+
+    while (splits_it.hasNext ()) {
+      Spliterator<Integer> item = splits_it.next (), n = item.trySplit ();
+
+      while (n != null) {
+        splits_it.add (n);
+        splits_it.previous ();
+        n = item.trySplit ();
+      }
+    }
+
+    splits_it = splits.listIterator ();
+
+    while (splits_it.hasNext ()) {
+      System.out.println (splits_it.next ().estimateSize ());
+    }
+    assertEquals (10, splits.size ());
+
+    splits_it = splits.listIterator ();
+    count = 0;
+
+    while (splits_it.hasNext ()) {
+      Spliterator<Integer> item = splits_it.next ();
+
+      assertTrue (item.tryAdvance (act));
+      assertFalse (item.tryAdvance (act));
+      ++count;
+    }
+
+    assertEquals (10, count);
+    try {
+      assertEquals (45, act.getClass().getMethod("sum").invoke (act));
+      act.getClass().getMethod("reset").invoke (act);
+    } catch (Exception e) { fail ("should never happen"); }
+
+  }
 }

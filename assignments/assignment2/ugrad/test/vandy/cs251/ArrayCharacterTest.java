@@ -4,7 +4,10 @@ import vandy.cs251.Array;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
-
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.ListIterator;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
@@ -308,4 +311,46 @@ public class ArrayCharacterTest {
         exception.expect(ArrayIndexOutOfBoundsException.class);
         it.next ();
     }
+
+  @Test
+  public void test_IteratorRemove () {
+    Array<Character> a = new Array<Character> (2, 'a');
+    a.set (1, 'b');
+
+    Iterator<Character> it = a.iterator ();
+
+    char c = it.next ();
+    assertEquals ('a', c);
+
+    it.remove ();
+
+    assertEquals (1, a.size ());
+    assertEquals ('b', (char) a.get (0));
+
+    c = it.next ();
+
+    assertEquals ('b', c);
+
+    it.remove ();
+
+    assertEquals (0, a.size ());
+
+    a.resize (2);
+
+    it = a.iterator ();
+    c = it.next ();
+    it.remove ();
+
+    exception.expect(IllegalStateException.class);
+    it.remove ();
+  }
+
+  @Test
+  public void test_IteratorRemoveEmpty () {
+    Array<Character> a = new Array<Character> (2, 'a');
+    Iterator<Character> it = a.iterator ();
+    exception.expect(IllegalStateException.class);
+    it.remove ();
+  }
+
 }
