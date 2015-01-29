@@ -7,7 +7,7 @@ import java.util.Iterator;
 /**
  * Provides a generic dynamically-(re)sized array abstraction.
  */
-public class Array<T extends Comparable>
+public class Array<T extends Comparable<T>>
              implements Comparable<Array<T>>,
                         Iterable<T>,
                         Cloneable {
@@ -131,9 +131,8 @@ public class Array<T extends Comparable>
 
     /**
      * Removes the element at the specified position in this Array.
-     * Shifts any subsequent elements to the left (subtracts one from
-     * their indices).  Returns the element that was removed from the
-     * Array.
+     * Shifts any subsequent elements to the left (subtracts one from their
+     * indices).  Returns the element that was removed from the Array.
      *
      * @throws ArrayIndexOutOfBoundsException if the index is out of range.
      * @param index the index of the element to remove
@@ -156,7 +155,7 @@ public class Array<T extends Comparable>
      * provided array is "less than" this array.
      */
     @Override
-    public int compareTo(Array s) {
+    public int compareTo(Array<T> s) {
         // TODO - you fill in here (replace 0 with proper return
         // value).
         return 0;
