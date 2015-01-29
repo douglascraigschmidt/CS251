@@ -38,12 +38,12 @@ public class MainActivity extends Activity  {
     public void onStart() {
         super.onStart();
         
-        /** Alert dialog. */
+        // Alert dialog. 
         AlertDialog dialog =
             new AlertDialog.Builder(MainActivity.this).create();
         dialog.setTitle("Options");
 		
-        /** Set back pressed. */
+        // Set back pressed.
         dialog.setOnCancelListener(new OnCancelListener() {
                 public void onCancel (DialogInterface dialog) {
                     dialog.dismiss();
@@ -51,16 +51,14 @@ public class MainActivity extends Activity  {
                 }
             });
         
-        /** Formats the succinct button. */
+        // Formats the succinct button.
         dialog.setButton(AlertDialog.BUTTON_NEGATIVE,
                          "Succinct",
                          new DialogInterface.OnClickListener() {
                              public void onClick(DialogInterface dialog,
                                                  int which) {
-                                 /**
-                                  * Sets an intent for launching the
-                                  * succinct activity.
-                                  */
+                                 // Sets an intent for launching the
+                                 // succinct activity.
                                  Intent intent =
                                      new Intent(getApplicationContext(),
                                                 CalculatorGUISuccinct.class);
@@ -69,23 +67,22 @@ public class MainActivity extends Activity  {
                              }
                          });
 
-        /** Formats the verbose button. */ 
+        // Formats the verbose button.
         dialog.setButton(AlertDialog.BUTTON_POSITIVE,
-					     "Verbose",
-					     new DialogInterface.OnClickListener() {
-					         public void onClick(DialogInterface dialog, int which) {
-						         /**
-						          *  Sets an intent for launching the 
-						          *  verbose activity.
-						          */
-						         Intent intent = new Intent(getApplicationContext(),
-						         CalculatorGUIVerbose.class);
-						         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-						         startActivity(intent);
-						     }
-					     });
+                         "Verbose",
+                         new DialogInterface.OnClickListener() {
+                             public void onClick(DialogInterface dialog, int which) {
+                                 // Sets an intent for launching the 
+                                 // verbose activity.
+                                 Intent intent =
+                                     new Intent(getApplicationContext(),
+                                                CalculatorGUIVerbose.class);
+                                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                 startActivity(intent);
+                             }
+                         });
 	
-        /** Displays dialog to screen. */
+        // Displays dialog to screen.
         dialog.show();
     }
 }	

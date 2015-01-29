@@ -8,9 +8,8 @@ import retrofit.http.Query;
  * code.
  * 
  * @author Mitchell
- *
  */
 public interface ExpressionTreeService {
     @GET("/ExpressionTreeServer")
-    ServerResult execute(@Query("input") String input);
+    ServerResponse execute(@Query("input") String input);
 }

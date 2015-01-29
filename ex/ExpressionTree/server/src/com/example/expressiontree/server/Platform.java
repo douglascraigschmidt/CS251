@@ -9,10 +9,14 @@ package com.example.expressiontree.server;
  *        manner that isn't exposed to the bulk of the app code.
  */
 public abstract class Platform {
-    /** The singleton @a Platform instance. */
+    /** 
+     * The singleton @a Platform instance. 
+     */
     private static Platform uniqueInstance = null;
 
-    /** Method to return the one and only singleton instance. */
+    /**
+     * Method to return the one and only singleton instance. 
+     */
     public static Platform instance() {
         return uniqueInstance;
     }
@@ -40,10 +44,14 @@ public abstract class Platform {
      */
     public abstract String platformName();
 
-    /** Returns true if we're running on a command-line platform. */
+    /** 
+     * Returns true if we're running on a command-line platform. 
+     */
     public abstract boolean isCommandLinePlatform();
 
-    /** Depending on the platform, creates a proper menu. */
+    /**
+     * Depending on the platform, creates a proper menu. 
+     */
     public abstract void outputMenu(String numeral,
                                     String option,
                                     String selection);
