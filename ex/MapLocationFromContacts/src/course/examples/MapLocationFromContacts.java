@@ -27,10 +27,7 @@ public class MapLocationFromContacts extends Activity {
 
     /**
      * Hook method called when a new instance of Activity is created.
-     * One time initialization code should go here, e.g., UI layout,
-     * some class scope variable initialization.  If finish() is
-     * called from onCreate no other lifecycle callbacks are called
-     * except for onDestroy().
+     * One time initialization code goes here, e.g., UI layout.
      *
      * @param Bundle object that contains saved state information.
      */
@@ -133,14 +130,15 @@ public class MapLocationFromContacts extends Activity {
                 new Intent(Intent.ACTION_PICK,
                            ContactsContract.Contacts.CONTENT_URI);
 
-            // Start the Contacts ContentProvider
-            // Activity, which will prompt the user to
-            // pick a contact and then return the Uri for
-            // the selected contact via the
-            // onActivityResult() hook method.
+            // Start the Contacts ContentProvider Activity, which will
+            // prompt the user to pick a contact and then return the
+            // Uri for the selected contact via the onActivityResult()
+            // hook method.
             startActivityForResult(intent,
                                    PICK_CONTACT_REQUEST);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -160,16 +158,18 @@ public class MapLocationFromContacts extends Activity {
 
             // Extract the address from the contact record indicated
             // by the Uri associated with the Intent.
-            final String address = getAddressFromContact(data.getData());
+            final String address =
+                getAddressFromContact(data.getData());
 
             // Launch the activity by sending an intent.  Android will
-            // choose the right one or let the user choose if more than
-            // one Activity can handle it.
+            // choose the right one or let the user choose if more
+            // than one Activity can handle it.
 
             // Create an Intent that will launch the "Maps" app.
             final Intent geoIntent = makeGeoIntent(address);
 
-            // Check to see if there's a Map app to handle the "geo" intent.
+            // Check to see if there's a Map app to handle the "geo"
+            // intent.
             if (geoIntent.resolveActivity(getPackageManager()) != null) 
                 startActivity(geoIntent);
             else
@@ -188,7 +188,9 @@ public class MapLocationFromContacts extends Activity {
 
         // Obtain a cursor to the appropriate contact at the
         // designated Uri.
-        Cursor cursor = cr.query(contactUri, null, null, null, null);
+        Cursor cursor =
+            cr.query(contactUri,
+                     null, null, null, null);
 
         // Start the cursor at the beginning.
         cursor.moveToFirst();
@@ -265,6 +267,8 @@ public class MapLocationFromContacts extends Activity {
      * app.
      */
     private Intent makeGeoIntent(String address) {
+        // Note the "loose coupling" between the Intent and the app(s)
+        // that handle this Intent.
         return new Intent(Intent.ACTION_VIEW,
                           Uri.parse("geo:0,0?q=" 
                                     + address));
@@ -275,6 +279,8 @@ public class MapLocationFromContacts extends Activity {
      * "Browser" app.
      */
     private Intent makeMapsIntent(String address) {
+        // Note the "loose coupling" between the Intent and the app(s)
+        // that handle this Intent.
         return new Intent(Intent.ACTION_VIEW,
                           Uri.parse("http://maps.google.com/?q=" 
                                     + address));

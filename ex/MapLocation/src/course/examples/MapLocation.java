@@ -26,10 +26,8 @@ public class MapLocation extends Activity {
 
     /**
      * Hook method called when a new instance of Activity is created.
-     * One time initialization code should go here, e.g., UI layout,
-     * some class scope variable initialization.  If finish() is
-     * called from onCreate no other lifecycle callbacks are called
-     * except for onDestroy().
+     * One time initialization code goes here, e.g., UI layout and
+     * class scope variable initialization.
      *
      * @param Bundle object that contains saved state information.
      */
@@ -155,6 +153,7 @@ public class MapLocation extends Activity {
                 startActivity(makeMapsIntent(address));
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -173,9 +172,11 @@ public class MapLocation extends Activity {
 
     /**
      * Factory method that returns an Intent that designates the "Map"
-     * app.
+     * app.  
      */
     private Intent makeGeoIntent(String address) {
+        // Note the "loose coupling" between the Intent and the app(s)
+        // that handle this Intent.
         return new Intent(Intent.ACTION_VIEW,
                           Uri.parse("geo:0,0?q=" 
                                     + address));
@@ -186,6 +187,8 @@ public class MapLocation extends Activity {
      * "Browser" app.
      */
     private Intent makeMapsIntent(String address) {
+        // Note the "loose coupling" between the Intent and the app(s)
+        // that handle this Intent.
         return new Intent(Intent.ACTION_VIEW,
                           Uri.parse("http://maps.google.com/?q=" 
                                     + address));
