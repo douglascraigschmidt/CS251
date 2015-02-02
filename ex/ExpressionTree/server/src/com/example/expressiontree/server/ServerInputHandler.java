@@ -80,9 +80,11 @@ public class ServerInputHandler extends HttpServlet {
             // Call a hook method to execute the command.
             try {
                 executeCommand(command);
+                
+                command.printValidCommands(true);
             }
             catch (Exception e) {
-            	response.getWriter().println("{result: \"Exception thrown.\"}");
+            	response.getWriter().print("{result: \"exception\", message: \"" + e.getMessage() + "\"}");
             	response.flushBuffer();
             	return;
             }

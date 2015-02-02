@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class PlatformProxy extends Platform {
     /**
-     * @@ Mitchell, please document this field.
+     * A list of json objects that represet calls to the Platform interface.
      */
     List<String> callObjects =
         new ArrayList<String>();
@@ -69,7 +69,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to outputLine to the current list of calls to be returned to the client.
      */
     @Override
     public String outputLine(String line) {
@@ -78,7 +78,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Since all input is handled by the servlet, this method will never be called.
      */
     @Override
     public String retrieveInput(boolean verbose) {
@@ -87,7 +87,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to outputString to the current list of calls to be returned to the client.
      */
     @Override
     public String outputString(String input) {
@@ -96,7 +96,8 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Returns the name of the current platform. Since we don't know what the client's platform
+     * is, we're returning proxy. 
      */
     @Override
     public String platformName() {
@@ -104,7 +105,8 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * This method is only called by the Android application and will never be called in the context
+     * of this server.
      */
     @Override
     public boolean isCommandLinePlatform() {
@@ -113,7 +115,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to outputMenu to the current list of calls to be returned to the client.
      */
     @Override
     public void outputMenu(String numeral,
@@ -126,7 +128,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to enableOption to the current list of calls to be returned to the client.
      */
     @Override
     public void enableOption(String option) {
@@ -136,7 +138,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to disableAll to the current list of calls to be returned to the client.
      */
     @Override
     public void disableAll(boolean verbose) {
@@ -145,7 +147,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to addString to the current list of calls to be returned to the client.
      */
     @Override
     public String addString(String Input) {
@@ -155,7 +157,7 @@ public class PlatformProxy extends Platform {
     }
 
     /**
-     * @@ Mitchell, please document this method.
+     * Appends a call to errorLog to the current list of calls to be returned to the client.
      */
     @Override
     public void errorLog(String javaFile, String errorMessage) {

@@ -21,8 +21,27 @@ public class ServerResponse {
      * The calls to Platform that are used to format output.
      */
     public List<PlatformCall> platformCalls;
+    
+    /**
+     * An error message that might be returned.
+     */
+    public String message;
 
     /**
+     * A getter for the message
+     */
+    public String getMessage() {
+		return message;
+	}
+
+    /**
+     * A setter for the message
+     */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	/**
      * Get the result returned from the server.
      */
     public String getResult() {
@@ -37,14 +56,14 @@ public class ServerResponse {
     }
 
     /**
-     * @@ Mitchell, please document this.
+     * Getter method for platform calls. 
      */
     public List<PlatformCall> getPlatformCalls() {
         return platformCalls;
     }
 
     /**
-     * @@ Mitchell, please document this.
+     * Setter method for platform calls. 
      */
     public void setPlatformCalls(List<PlatformCall> platformCalls) {
         this.platformCalls = platformCalls;
