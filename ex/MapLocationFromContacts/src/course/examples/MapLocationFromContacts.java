@@ -155,6 +155,9 @@ public class MapLocationFromContacts extends Activity {
         // the request code is what we're expecting.
         if (resultCode == Activity.RESULT_OK
             && requestCode == PICK_CONTACT_REQUEST) {
+            // Create a Runnable so the (potentially) long-duration
+            // getAddressFromContact() method can run without blocking
+            // the UI Thread.
             final Runnable getAndDisplayAddressFromContact =
                 new Runnable() {
                     @Override
@@ -165,8 +168,7 @@ public class MapLocationFromContacts extends Activity {
                         final String address =
                             getAddressFromContact(data.getData());
 
-                        MapLocationFromContacts.this.runOnUiThread
-                            (new Runnable() {
+                        runOnUiThread(new Runnable() {
                                 public void run() {
                                     // Launch the activity by sending
                                     // an intent.  Android will choose
