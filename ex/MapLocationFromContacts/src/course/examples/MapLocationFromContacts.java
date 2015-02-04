@@ -150,31 +150,55 @@ public class MapLocationFromContacts extends Activity {
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
-                                    Intent data) {
+                                    final Intent data) {
         // Check if the started Activity completed successfully and
         // the request code is what we're expecting.
         if (resultCode == Activity.RESULT_OK
             && requestCode == PICK_CONTACT_REQUEST) {
+            final Runnable getAndDisplayAddressFromContact =
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        // Extract the address from the contact record
+                        // indicated by the Uri associated with the
+                        // Intent.
+                        final String address =
+                            getAddressFromContact(data.getData());
 
-            // Extract the address from the contact record indicated
-            // by the Uri associated with the Intent.
-            final String address =
-                getAddressFromContact(data.getData());
+                        MapLocationFromContacts.this.runOnUiThread
+                            (new Runnable() {
+                                public void run() {
+                                    // Launch the activity by sending
+                                    // an intent.  Android will choose
+                                    // the right one or let the user
+                                    // choose if more than one
+                                    // Activity can handle it.
 
-            // Launch the activity by sending an intent.  Android will
-            // choose the right one or let the user choose if more
-            // than one Activity can handle it.
-
-            // Create an Intent that will launch the "Maps" app.
-            final Intent geoIntent = makeGeoIntent(address);
-
-            // Check to see if there's a Map app to handle the "geo"
-            // intent.
-            if (geoIntent.resolveActivity(getPackageManager()) != null) 
-                startActivity(geoIntent);
-            else
-                // Start the Browser app instead.
-                startActivity(makeMapsIntent(address));
+                                    // Create an Intent that will
+                                    // launch the "Maps" app.
+                                    final Intent geoIntent =
+                                        makeGeoIntent(address);
+                                        
+                                    // Check to see if there's a Map
+                                    // app to handle the "geo" intent.
+                                    if (geoIntent.resolveActivity
+                                        (getPackageManager()) != null) 
+                                        startActivity(geoIntent);
+                                    else
+                                        // Start the Browser app
+                                        // instead.
+                                        startActivity(makeMapsIntent(address));
+                                }
+                            });
+                    }
+                };
+            // Create a new Thread to get the address from the contact
+            // and launch the appropriate Activity to display the
+            // address.
+            new Thread(getAndDisplayAddressFromContact).start();
+            // BTW, if you don't want to use a separate Thread just
+            // say:
+            // getAndDisplayAddressFromContact.run();
         }
     }
 
