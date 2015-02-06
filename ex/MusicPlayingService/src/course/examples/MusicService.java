@@ -17,10 +17,12 @@ public class MusicService extends Service {
      */
     private String TAG = getClass().getSimpleName();
 
+    private static String SONG_ID = "SongID";
+
     /**
      * The MediaPlayer that plays a song in the background.
      */
-    private MediaPlayer player;
+    private MediaPlayer mPlayer;
 
     /**
      * This factory method returns an intent used to play and stop
@@ -34,30 +36,10 @@ public class MusicService extends Service {
                        MusicService.class);
 
         if (resId != 0) 
-            // Add the SongID as an "extra" to the intent.
-            intent.putExtra("SongID",
+            // Add the SONG_ID as an "extra" to the intent.
+            intent.putExtra(SONG_ID,
                             resId);
         return intent;
-    }
-
-    /**
-     * Hook method called when a new instance of Service is created.
-     * One time initialization code goes here.
-     */
-    @Override
-    public void onCreate() {	
-        super.onCreate();
-
-        Log.i(TAG,"onCreate() entered");
-
-        // Create a MediaPlayer that will play a particular song.
-        // Naturally, a "real" application wouldn't hard-code the
-        // song!
-        player = MediaPlayer.create(this, R.raw.braincandy);
-
-        // Just play the song once, rather than have it loop
-        // endlessly.
-        player.setLooping(false);
     }
 
     /**
@@ -69,9 +51,21 @@ public class MusicService extends Service {
                                int startid) {
         Log.i(TAG,"onStartCommand() entered");
 
-        // Start playing the song.
-        player.start();
+        // Extract the resId for the requested song from the â€œextraâ€�.
+        int songId = intent.getIntExtra(SONG_ID, 0);
 
+        // Create a MediaPlayer that will play the requested song.
+        mPlayer = MediaPlayer.create(this,
+                                     songId);
+
+        // Just play the song once, rather than have it loop
+        // endlessly.
+        mPlayer.setLooping(false);
+
+        // Start playing the song.
+        mPlayer.start();
+
+        // Donâ€™t restart Service if it shuts down
         return START_NOT_STICKY;
     }
 	
@@ -83,7 +77,7 @@ public class MusicService extends Service {
         Log.i(TAG,"onDestroy() entered");
 
         // Stop playing the song.
-        player.stop();
+        mPlayer.stop();
 
         // Call up to the super class.
         super.onDestroy();

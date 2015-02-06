@@ -33,7 +33,9 @@ public class MusicActivity extends Activity {
      * Play a song via the MusicService.
      */
     public void playSong (View src) {
-        // Create an intent that will start the MusicService.
+        // Create an intent that will start the MusicService to play a
+        // requested song ("real" application wouldn't hard-code the
+        // song!)
         Intent intent =
             MusicService.makeIntent(this,
                                     R.raw.braincandy);
