@@ -17,12 +17,12 @@ public class MapLocation extends Activity {
     /**
      * Debugging tag used by the Android logger.
      */
-    String TAG = getClass().getSimpleName();
+    private String TAG = getClass().getSimpleName();
 
     /**
      * Address entered by the user.
      */
-    EditText mAddrText;
+    private EditText mAddrText;
 
     /**
      * Hook method called when a new instance of Activity is created.

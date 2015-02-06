@@ -16,14 +16,14 @@ import android.widget.Button;
  */
 public class MapLocationFromContacts extends Activity {
     /**
+     * Debugging tag used by the Android logger.
+     */
+    private String TAG = getClass().getSimpleName();
+
+    /**
      * A "code" that identifies the request.
      */
     private static final int PICK_CONTACT_REQUEST = 0;
-
-    /**
-     * Debugging tag used by the Android logger.
-     */
-    String TAG = getClass().getSimpleName();
 
     /**
      * Hook method called when a new instance of Activity is created.
