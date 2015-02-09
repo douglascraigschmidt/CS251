@@ -29,6 +29,11 @@ public class MusicActivity extends Activity {
     private EditText mUrlEditText;
 
     /**
+     * Intent that's used to start and stop the MusicService.
+     */
+    private Intent mMusicServiceIntent;
+
+    /**
      * Hook method called when a new instance of Activity is created.
      * One time initialization code goes here, e.g., UI layout and
      * class scope variable initialization.
@@ -54,27 +59,21 @@ public class MusicActivity extends Activity {
      */
     public void playSong (View src) {
         // Create an intent that will start the MusicService to play a
-        // requested song ("real" application wouldn't hard-code the
-        // song!)
-        Intent intent =
+        // requested song.
+        mMusicServiceIntent =
             MusicService.makeIntent(this,
                                     getUrlString());
 
-        // Start the MusicService.
-        startService(intent);
+        // Start the MusicService via the intent.
+        startService(mMusicServiceIntent);
     }
 
     /**
      * Stop playing a song via the MusicService.
      */
     public void stopSong (View src) {
-        // Create an intent that will stop the MusicService.
-        Intent intent =
-            MusicService.makeIntent(this,
-                                    null);
-
-        // Stop the MusicService.
-        stopService (intent);
+        // Stop the MusicService via the intent.
+        stopService (mMusicServiceIntent);
     }	
 
     /**

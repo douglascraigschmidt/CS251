@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
@@ -40,8 +41,7 @@ public class MusicService extends Service
                                     String songURL) {
         // Create an intent that points to the MusicService.
         Intent intent =
-            new Intent(context,
-                       MusicService.class);
+            new Intent(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
 
         // Add the SONG_URL as an "extra" to the intent.
         intent.putExtra(SONG_URL,
@@ -61,6 +61,8 @@ public class MusicService extends Service
 
         // Create a MediaPlayer that will play the requested song.
         mPlayer = new MediaPlayer();
+
+        // Indicate the MediaPlayer will stream the audio.
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
     /**
@@ -72,13 +74,16 @@ public class MusicService extends Service
                                int startid) {
         Log.i(TAG,"onStartCommand() entered");
 
-        // Extract the resId for the requested song from the â€œextraâ€�.
-        String songURL = intent.getStringExtra(SONG_URL);
         try {
+            // Extract the resId for the requested song from the
+            // â€œextraâ€�.
+            String songURL = intent.getStringExtra(SONG_URL);
+
             // Indicate the URL indicating the song to play.
             mPlayer.setDataSource(songURL);
                 
-            // Register the callback.
+            // Register "this" as the callback when the designated
+            // song is ready to play.
             mPlayer.setOnPreparedListener(this);
 
             // This call doesn't block the UI Thread.
@@ -92,7 +97,7 @@ public class MusicService extends Service
     }
 
     /** 
-     * Called back when MediaPlayer is ready.
+     * Called back when MediaPlayer is ready to play the song.
      */
     public void onPrepared(MediaPlayer player) {
         // Just play the song once, rather than have it loop
