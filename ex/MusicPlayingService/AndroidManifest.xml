@@ -23,8 +23,7 @@
     </activity>
 
     <service
-       android:name=".MusicService" 
-       android:enabled="true"> 
+       android:name=".MusicService"> 
        <intent-filter>
          <action android:name="course.examples.action.PLAY" />
          <category android:name="android.intent.category.DEFAULT" />

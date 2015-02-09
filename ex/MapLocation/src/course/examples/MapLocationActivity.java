@@ -13,7 +13,7 @@ import android.widget.EditText;
 /**
  * An Activity that maps a location from an address given by the user.
  */
-public class MapLocation extends Activity {
+public class MapLocationActivity extends Activity {
     /**
      * Debugging tag used by the Android logger.
      */
