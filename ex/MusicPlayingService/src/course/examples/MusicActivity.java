@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * This MusicActivity is a simple front-end to the MusicService, which
@@ -73,7 +74,12 @@ public class MusicActivity extends Activity {
      */
     public void stopSong (View src) {
         // Stop the MusicService via the intent.
-        stopService (mMusicServiceIntent);
+        if (mMusicServiceIntent != null) {
+            stopService(mMusicServiceIntent);
+            mMusicServiceIntent = null;
+        } else
+            showToast("no song is currently playing");
+
     }	
 
     /**
@@ -90,5 +96,14 @@ public class MusicActivity extends Activity {
             url = DEFAULT_SONG;
 
         return url; 
+    }
+
+    /**
+     * Show a toast to the user.
+     */
+    public void showToast(String toastString) {
+        Toast.makeText(this,
+                       toastString,
+                       Toast.LENGTH_SHORT).show();
     }
 }

@@ -5,10 +5,11 @@ import java.io.IOException;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.MediaStore;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.util.Log;
 
 /**
@@ -22,11 +23,12 @@ public class MusicService extends Service
      */
     private String TAG = getClass().getSimpleName();
 
+    private static String ACTION_PLAY = "course.examples.action.PLAY";
+
     /**
-     * Key used to identify the extra in an intent that contains the
-     * URL for the requested song.
+     * Keep track of whether a song is currently playing.
      */
-    private static String SONG_URL = "SONG_URL";
+    private static boolean mSongPlaying;
 
     /**
      * The MediaPlayer that plays a song in the background.
@@ -39,14 +41,10 @@ public class MusicService extends Service
      */
     public static Intent makeIntent(final Context context,
                                     String songURL) {
-        // Create an intent that points to the MusicService.
-        Intent intent =
-            new Intent(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
-
-        // Add the SONG_URL as an "extra" to the intent.
-        intent.putExtra(SONG_URL,
-                        songURL);
-        return intent;
+        // Create and return an intent that points to the
+        // MusicService.
+        return new Intent(ACTION_PLAY,
+                          Uri.parse(songURL));
     }
 
     /**
@@ -55,6 +53,8 @@ public class MusicService extends Service
      */
     @Override
     public void onCreate() {
+        Log.i(TAG,"onCreate() entered");
+
         // Always call super class for necessary
         // initialization/implementation.
         super.onCreate();
@@ -65,6 +65,7 @@ public class MusicService extends Service
         // Indicate the MediaPlayer will stream the audio.
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     }
+
     /**
      * Hook method called every time the MusicService is started.
      */
@@ -72,13 +73,18 @@ public class MusicService extends Service
     public int onStartCommand (Intent intent,
                                int flags,
                                int startid) {
-        Log.i(TAG,"onStartCommand() entered");
+        // Extract the URL for the song to play.
+        String songURL = intent.getDataString();
+
+        Log.i(TAG,
+              "onStartCommand() entered with song URL "
+              + songURL);
+
+        if (mSongPlaying) 
+            // Stop playing the current song.
+            stopSong();
 
         try {
-            // Extract the resId for the requested song from the
-            // â€œextraâ€�.
-            String songURL = intent.getStringExtra(SONG_URL);
-
             // Indicate the URL indicating the song to play.
             mPlayer.setDataSource(songURL);
                 
@@ -92,7 +98,7 @@ public class MusicService extends Service
         	e.printStackTrace();
         }
 
-        // Don't restart Service if it shuts down
+        // Don't restart Service if it shuts down.
         return START_NOT_STICKY;
     }
 
@@ -100,9 +106,14 @@ public class MusicService extends Service
      * Called back when MediaPlayer is ready to play the song.
      */
     public void onPrepared(MediaPlayer player) {
+        Log.i(TAG,"onPrepared() entered");
+
         // Just play the song once, rather than have it loop
         // endlessly.
         player.setLooping(false);
+
+        // Note that song is now playing.
+        mSongPlaying = true;
 
         // Start playing the song.
         player.start();
@@ -116,12 +127,23 @@ public class MusicService extends Service
         Log.i(TAG,"onDestroy() entered");
 
         // Stop playing the song.
-        mPlayer.stop();
+        stopSong();
 
         // Call up to the super class.
         super.onDestroy();
     }
-	
+
+    /**
+     * Stop playing the song.
+     */
+    private void stopSong() {
+        Log.i(TAG,"stopSong() entered");
+
+        mPlayer.stop();
+        mPlayer.reset();
+        mSongPlaying = false;
+    }
+
     /**
      * This no-op method is necessary since MusicService is a
      * so-called "Started Service".
