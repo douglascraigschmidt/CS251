@@ -130,7 +130,7 @@ public class MapLocationActivity extends Activity {
             // Get the address entered by the user.
             String address = mAddrText.getText().toString();
 
-            // Replace spaces with '+' signs to make the browser
+            // Replace spaces (' ') with '+' signs to make the browser
             // happy.
             address = address.replace(' ', '+');
 

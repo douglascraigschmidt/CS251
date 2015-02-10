@@ -14,7 +14,7 @@ import android.widget.Button;
 /**
  * An Activity that maps a location from an address of a contact.
  */
-public class MapLocationFromContacts extends Activity {
+public class MapLocationFromContactsActivity extends Activity {
     /**
      * Debugging tag used by the Android logger.
      */

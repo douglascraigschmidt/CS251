@@ -56,7 +56,7 @@ public class MusicActivity extends Activity {
     }
 	
     /**
-     * Play a song via the MusicService.
+     * Start playing a song via the MusicService.
      */
     public void playSong (View src) {
         // Create an intent that will start the MusicService to play a

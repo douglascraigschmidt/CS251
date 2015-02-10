@@ -134,13 +134,18 @@ public class MusicService extends Service
     }
 
     /**
-     * Stop playing the song.
+     * Stops the MediaPlayer from playing the song.
      */
     private void stopSong() {
         Log.i(TAG,"stopSong() entered");
 
+        // Stop playing the song.
         mPlayer.stop();
+        
+        // Reset the state machine of the MediaPlayer.
         mPlayer.reset();
+
+        // Note that no song is playing.
         mSongPlaying = false;
     }
 
