@@ -30,8 +30,8 @@ public class DownloadImageService extends IntentService {
     private static final String MESSENGER = "MESSENGER";
 
     /**
-     * String constant used to extract the pathname "extra" from an
-     * intent.
+     * String constant used to extract the pathname to a downloaded
+     * image from a Bundle.
      */
     private static final String PATHNAME = "PATHNAME";
 
