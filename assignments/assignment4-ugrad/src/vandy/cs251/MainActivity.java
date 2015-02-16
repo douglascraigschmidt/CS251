@@ -87,16 +87,14 @@ public class MainActivity extends LifecycleLoggingActivity {
 
             // Create a new Intent to an Activity that can download an
             // image from the URL given by the user.  In this case
-            // it's an Intent that's implemented by the
-            // DownloadImageActivity.
-
+            // it's an intent that's implemented by the
+            // DownloadImageService.
             // @@ TODO - you fill in here.
 
             // Start the Service associated with the Intent, which
             // will download the image and then return the Uri for the
             // downloaded image file to the DownloadHandler via the
             // Messenger passed as an "extra" with the Intent.
-
             // @@ TODO -- you fill in here.
         } catch (Exception e) {
             e.printStackTrace();
