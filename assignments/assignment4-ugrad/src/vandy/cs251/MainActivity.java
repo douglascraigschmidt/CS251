@@ -85,7 +85,7 @@ public class MainActivity extends LifecycleLoggingActivity {
             hideKeyboard(this,
                          mUrlEditText.getWindowToken());
 
-            // Create a new Intent to an Activity that can download an
+            // Create a new intent to a Service that can download an
             // image from the URL given by the user.  In this case
             // it's an intent that's implemented by the
             // DownloadImageService.
