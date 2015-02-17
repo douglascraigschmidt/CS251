@@ -157,9 +157,9 @@ public class DownloadUtils {
         ContentValues values =
             new ContentValues();
         values.put(Images.Media.TITLE,
-                   "Doug's photo");
+                   fileName);
         values.put(Images.Media.DESCRIPTION,
-                   "A fancy photo of Doug");
+                   fileName);
         values.put(Images.Media.DATE_TAKEN,
                    System.currentTimeMillis ());
         values.put(Images.ImageColumns.BUCKET_ID, 
