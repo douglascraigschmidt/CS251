@@ -1,4 +1,4 @@
-package com.example.expressiontree;
+package com.example.expressiontree.model;
 
 import java.util.List;
 
@@ -18,6 +18,19 @@ public class ServerResponse {
     public String result;
 
     /**
+     * Our client ID that we should use to access state we've previously created on the server. 
+     */
+    public Long clientID;
+    
+    public Long getID() {
+		return clientID;
+	}
+
+	public void setID(Long iD) {
+		clientID = iD;
+	}
+
+	/**
      * The calls to Platform that are used to format output.
      */
     public List<PlatformCall> platformCalls;
