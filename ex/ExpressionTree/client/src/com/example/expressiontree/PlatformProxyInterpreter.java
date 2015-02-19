@@ -34,10 +34,10 @@ public class PlatformProxyInterpreter {
                     platform.disableAll(Boolean.valueOf(call.params.get(0)));
                 if (call.fname.equals("addString"))
                     platform.addString(call.params.get(0));
-                if (call.fname.equals("errorLog"))
+                //if (call.fname.equals("errorLog"))
                     // @@ TODO - Is this secure?
-                    platform.errorLog(call.params.get(0),
-                                      call.params.get(1));
+                    //platform.errorLog(call.params.get(0),
+                    //                call.params.get(1));
             }
         }
     }
