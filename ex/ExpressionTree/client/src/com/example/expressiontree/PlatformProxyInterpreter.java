@@ -8,13 +8,13 @@ import com.example.expressiontree.model.ServerResponse;
 /**
  * @class PlatformProxyInterpreter
  * 
- * @brief Demarshalls the data created by PlatformProxy and interprets it,
- *        calling the Platform functions specified by the data.
+ * @brief Demarshalls the data created by PlatformProxy and interprets
+ *        it, calling the Platform functions specified by the data.
  */
 public class PlatformProxyInterpreter {
     /**
      * Interprets the given server response and makes the
-     * corresponding calls to Platform singletone.
+     * corresponding calls to Platform singleton.
      */
     public static void interpret(Platform platform,
                                  ServerResponse response) {

@@ -20,19 +20,26 @@ public class ServerResponse {
     public String result;
 
     /**
-     * Our client ID that we should use to access state we've previously created on the server. 
+     * Our client ID that we should use to access state we've
+     * previously created on the server.
      */
     public Long clientID;
     
+    /**
+     * Get the client ID.
+     */
     public Long getID() {
-		return clientID;
-	}
+        return clientID;
+    }
 
-	public void setID(Long iD) {
-		clientID = iD;
-	}
+    /**
+     * Set the client ID.
+     */
+    public void setID(Long iD) {
+        clientID = iD;
+    }
 
-	/**
+    /**
      * The calls to Platform that are used to format output.
      */
     public List<PlatformCall> platformCalls;
@@ -46,17 +53,17 @@ public class ServerResponse {
      * A getter for the message
      */
     public String getMessage() {
-		return message;
-	}
+        return message;
+    }
 
     /**
      * A setter for the message
      */
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	/**
+    /**
      * Get the result returned from the server.
      */
     public String getResult() {

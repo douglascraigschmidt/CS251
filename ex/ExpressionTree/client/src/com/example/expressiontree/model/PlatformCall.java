@@ -22,9 +22,11 @@ public class PlatformCall {
      */
     public List<String> params;
 
-	public PlatformCall(String fname, List<String> params) {
-		this.fname = fname;
-		this.params = params;
-	}
-	
+    /**
+     * Constructor.
+     */
+    public PlatformCall(String fname, List<String> params) {
+        this.fname = fname;
+        this.params = params;
+    }
 }

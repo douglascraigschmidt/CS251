@@ -115,6 +115,9 @@ public class ServerInputHandler extends HttpServlet {
 			
             // Convert the Server Response into JSON using GSON and
             // write it out.
+
+            // @@ Mitchell, is there a way to remove the dependency on
+            // Gson?
             Gson gson = new Gson();
             String json = gson.toJson(resp);
             response.getWriter().println(json);
