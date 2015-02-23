@@ -91,15 +91,20 @@ public class UserCommandProxy {
     }
     
     /**
-     * @@ Mitchell, please document this method.
+     * Send the command string to the server. 
      */
     private ServerResponse doRequest(ExpressionTreeService service)
         throws UnsupportedEncodingException {
-        // @@ Mitchell, please explain what's going on here:
+    	
+    	// If we have an ID for this specific session, go ahead and send it along
+    	// with the command string.
     	if (mClientID != null) 
             return service.execute(URLEncoder.encode(mUserCommandString,
                                                      "UTF-8"),
                                    mClientID);
+    	
+    	// Otherwise, just send the command string, signaling that we need a token for this
+    	// session.
     	else
             return service.execute(URLEncoder.encode(mUserCommandString,
                                                      "UTF-8"));

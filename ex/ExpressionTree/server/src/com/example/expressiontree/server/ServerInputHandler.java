@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.expressiontree.model.ServerResponse;
-import com.google.gson.Gson;
 
 /**
  * @class ServerInputHandler
@@ -101,26 +100,23 @@ public class ServerInputHandler extends HttpServlet {
                 return;
             }
 			
-            // @@ Mitchell, please explain what this call is doing
-            // (I'm confused about why it's called "reap").
+            // Take all the calls that have been made to Platform since the last time we 
+            // called reap and combine them into a single response.
             ServerResponse resp =
                 ((PlatformProxy) Platform.instance()).reap();
 
-            // @@ Mitchell, please document what this code is doing.
+            // If the client didn't provide a valid ID, then we have to generate one for them
+            // and add it to the response.
             if (!foundId) {
                 resp.setID(mNextID);
                 mClientStates.put(mNextID, factory);
                 ++mNextID;
             }
 			
-            // Convert the Server Response into JSON using GSON and
+            // Convert the Server Response into JSON and
             // write it out.
-
-            // @@ Mitchell, is there a way to remove the dependency on
-            // Gson?
-            Gson gson = new Gson();
-            String json = gson.toJson(resp);
-            response.getWriter().println(json);
+            String out = resp.toJson();
+            response.getWriter().println(resp.toJson());
         }
 
         response.flushBuffer();
