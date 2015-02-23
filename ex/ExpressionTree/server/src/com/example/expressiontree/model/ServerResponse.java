@@ -82,43 +82,47 @@ public class ServerResponse {
         this.platformCalls = platformCalls;
     }
     
+    /**
+     * Converts the ServerResponse from a Java object into a Json
+     * formatted message that can be passed over HTTP.
+     */
     public String toJson() {
-		StringBuilder out = new StringBuilder();
+        StringBuilder out = new StringBuilder();
 		
-		out.append("{result:\"" + result + '"');
+        out.append("{result:\"" + result + '"');
 		
-		if (clientID != null)
-			out.append(", clientID:" + clientID.longValue());
+        if (clientID != null)
+            out.append(", clientID:" + clientID.longValue());
 		
-		if (message != null)
-			out.append(", message:\"" + message + '"');
+        if (message != null)
+            out.append(", message:\"" + message + '"');
 		
-		if (platformCalls != null) {
-			out.append(", platformCalls: [");
+        if (platformCalls != null) {
+            out.append(", platformCalls: [");
 			
-			for (int i = 0; i < platformCalls.size(); ++i) {
-				if (i != 0)
-					out.append(',');
+            for (int i = 0; i < platformCalls.size(); ++i) {
+                if (i != 0)
+                    out.append(',');
 				
-				PlatformCall call = platformCalls.get(i);
+                PlatformCall call = platformCalls.get(i);
 				
-				out.append("{fname:\"" + call.fname + "\", params: [ ");
+                out.append("{fname:\"" + call.fname + "\", params: [ ");
 				
-					for (int k = 0; k < call.params.size(); ++k) {
-						if (k != 0)
-							out.append(',');
+                for (int k = 0; k < call.params.size(); ++k) {
+                    if (k != 0)
+                        out.append(',');
 						
-						out.append('"' + call.params.get(k) + '"');
-					}
+                    out.append('"' + call.params.get(k) + '"');
+                }
 					
-				out.append("] }");
-			}
+                out.append("] }");
+            }
 			
-			out.append(']');
-		}
+            out.append(']');
+        }
 		
-		out.append("}");
+        out.append("}");
 		
-		return out.toString();
-	}
+        return out.toString();
+    }
 }
