@@ -1,0 +1,107 @@
+<h1>Objective</h1>
+
+<p>In the final two-part series of assignments for the CS 251 course, we
+will develop a solar system simulator.  The first part of this
+assignment involves appliing several design patterns to implement a
+simple version of the simulator, which will provide the foundation
+that will integrate with the Android GUI in the second part of this
+assignment.</p>
+
+<p>This first part runs as a command-line application.  Since the second
+part will run as an Android application you can only use Java 7
+language features since Android doesn't support Java 8 (yet).</p>
+
+<h1>Primary Participants</h1>
+
+<p>This two-part series of assignments will implement the following set
+of classes.</p>
+
+<h2><code>Entity</code></h2>
+
+<p>The <code>Entity</code> models any any object (such as the sun, planets and
+moons) that is present in the solar system simulation.  <code>Entity</code>s have
+the following properties:</p>
+
+<ul>
+<li>A name</li>
+<li>A position</li>
+<li>A mass</li>
+<li>A velocity</li>
+</ul>
+
+<p>The second part of the assignment will have multiple types of objects
+that must be handled in special ways.  For the first part, however,
+only a single type of object is required.</p>
+
+<p>In Part 1, <code>Entity</code> will also support an inverse <a href="http://en.wikipedia.org/wiki/Memento_pattern">Memento
+Pattern</a>.  The Memento
+pattern provides a facility to record the <em>current</em> state of an object
+to support rollback.  In this assignment, the Memento pattern will be
+used to record changes that will be made to an instance of <code>Entity</code> in
+the future.</p>
+
+<p>An <code>Entity</code> will be able to accept <code>EntityVisitor</code>s, described below.</p>
+
+<h2>Visitors</h2>
+
+<p>This interface describe a simple version of the [Visitor
+Pattern(http://en.wikipedia.org/wiki/Visitor_pattern) for <code>Entity</code>
+objects.  The first part of the assignment features the following two
+concrete implementations of this interface:</p>
+
+<ul>
+<li>A <code>PrintVisitor</code> that prints an object to standard output.</li>
+<li>A <code>StepSimulationVisitor</code> that calculates and stores a memento
+used to update an <code>Entity</code> given a particular time step.  </li>
+</ul>
+
+<h2><code>Universe</code></h2>
+
+<p>This object encapsulates the overall state of the simulation.  It
+implements the
+<a href="http://en.wikipedia.org/wiki/Singleton_pattern">Singleton</a> design
+pattern.  <code>Universe</code> is responsible for maintaining a list of objects
+present in the system, including:</p>
+
+<ul>
+<li>Providing a way to add an object to the simulation,</li>
+<li>Providing a way to remove objects from the simulation, and</li>
+<li>Providing a way to
+<a href="http://en.wikipedia.org/wiki/Iterator_pattern">iterate</a>
+over all of the objects present in the simulation. This iterator will
+implement an interface similar to Java 8 Spliterators (though we
+won't use Java 8 features explicitly due to Android limitations)</li>
+</ul>
+
+<p><code>Universe</code> also provides a facility to advance the simulation by a
+provided time increment via a method called <code>stepSimulation(double
+seconds)</code>.  This method will implement the following pseudocode:</p>
+
+<ul>
+<li><p>For each <code>Entity</code> present in the system:</p>
+
+<ul>
+<li><p>Calculate the force exerted on the <code>Entity</code> by every other <code>Entity</code> in
+the system.</p></li>
+<li><p>Use this force to calculate the change in velocity for the
+<code>Entity</code>.</p></li>
+<li><p>Update the position of the object based on its new velocity and the
+requested time slice</p></li>
+</ul></li>
+</ul>
+
+<p>For the first part of this assignment, you may assume that the <em>first</em>
+<code>Entity</code> added to the system is the Sun and is immobile.</p>
+
+<p>Since Java 7 lacks Spliterators, we will use the <a href="http://en.wikipedia.org/wiki/Adapter_pattern">Adapter
+Pattern</a> to provide a
+compatible interface built using normal Java Iterators.</p>
+
+<h1>Provided Code</h1>
+
+<p>We will provide skeletons that provide the interfaces for <code>Entity</code>,
+<code>EntityVisitor</code>, and <code>Universe</code>.  We will also provide a library of
+mathematical methods and types that will be used to represent and
+perform calculations of <code>Entity</code> position and velocity.</p>
+
+<p>This code will be made available in Dr. Schmidt's <a href="https://github.com/douglascraigschmidt/CS251/tree/master/assignments/assignment5a/">Github repository</a>.</p>
