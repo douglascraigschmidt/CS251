@@ -2,6 +2,8 @@ package vandy.cs251;
 
 import vandy.cs251.EntityVisitor;
 import java.util.ArrayList;
+import java.util.Iterator;
+import mikera.vectorz.Vector2;
 
 public class StepSimulationVisitor implements EntityVisitor {
   /** Stores mementos generated during visitation of entities. */
@@ -21,5 +23,9 @@ public class StepSimulationVisitor implements EntityVisitor {
    */
   public void visit (Entity ent) {
     // TODO: Fill in here, if necessary
+  }
+
+  public void apply () {
+    // TODO: Fill in here, if necessary.
   }
 }

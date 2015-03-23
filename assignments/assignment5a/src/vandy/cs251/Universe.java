@@ -3,6 +3,7 @@ package vandy.cs251;
 import java.util.ArrayList;
 // Please see https://github.com/mikera/vectorz/blob/develop/src/main/java/mikera/vectorz/Vector2.java
 import mikera.vectorz.Vector2;
+import java.util.Iterator;
 import vandy.cs251.EntityVisitor;
 import vandy.cs251.Spliterator;
 
@@ -25,6 +26,13 @@ class Universe {
   public static Universe instance () {
     // TODO: Fill in here, if necessary
     return null;
+  }
+
+  /**
+   * Release the universe, so instance () will return a new Universe.
+   */
+  public static void release () {
+    // TODO: Fill in here, if necessary
   }
 
   /**
@@ -74,6 +82,11 @@ class Universe {
     return null;
   }
 
+  public Iterator<Entity> iterator () {
+    // TODO: Fill in here, if necessary
+    return null;
+  }
+
   /**
    * Advance the simulation by the provided number of seconds.
    */
@@ -81,12 +94,20 @@ class Universe {
     // TODO: Fill in here, if necessary
   }
 
+  private static final double mGravitationalConstant = 6.67428e-11;
+
   /**
    * Calculates the force exerted on the 'base' by 'other'.
    */
   public static Vector2 getForce (Entity base, Entity other) {
     // To be provided, do not edit.
-    return null;
+    if (other.getPosition ().equals (base.getPosition ())) return new Vector2 ();
+    Vector2 direction = other.getPosition ().clone ();
+    direction.sub (base.getPosition ());
+    Vector2 result = direction.toNormal ();
+    result.scaleAdd ((other.getMass () * base.getMass ()) / direction.magnitudeSquared (), 0);
+    result.scaleAdd (mGravitationalConstant, 0);
+    return result;
   }
 
   /**
@@ -95,11 +116,15 @@ class Universe {
    */
   public static Vector2 calcVelocityDelta (Entity ent, Vector2 force) {
     // To be provided, do not edit.
-    return null;
+    Vector2 result = force.clone ();
+    result.scaleAdd (1/ent.getMass (), 0);
+    return result;
   }
 
-  public static Vector2 calcPositionDelta (Vector2 position, Vector2 force, double time) {
+  public static Vector2 calcPositionDelta (Vector2 position, Vector2 velocity, double time) {
     // To be provided, do not edit.
-    return null;
+    Vector2 result = position.clone ();
+    result.addMultiple (velocity, time);
+    return result;
   }
 }
