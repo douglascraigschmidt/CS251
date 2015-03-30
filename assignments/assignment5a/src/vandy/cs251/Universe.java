@@ -52,11 +52,12 @@ class Universe {
   /**
    * Get the identified entity.
    */
-  public void getEntity(String name) {
+  public Entity getEntity(String name) {
     // TODO: Fill in here, if necessary
   }
 
   class UniverseSpliterator implements Spliterator<Entity> {
+    // TODO: You will need to add constructor(s) and data member(s)
     public long estimateSize() {
       // TODO: Fill in here, if necessary
       return 0;
