@@ -6,4 +6,6 @@ import vandy.cs251.Entity;
 public interface EntityVisitor {
   /** Visit the provided Entity. */
   public void visit(Entity entity);
+  public void visit(OtherEntity entity);
+  public void visit(MyCoolOtherEntity entity);
 }

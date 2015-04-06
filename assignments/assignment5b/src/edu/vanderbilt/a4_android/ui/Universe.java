@@ -1,12 +1,11 @@
-package vandy.cs251;
+package edu.vanderbilt.a4_android.ui;
 
 import java.util.ArrayList;
-// Please see https://github.com/mikera/vectorz/blob/develop/src/main/java/mikera/vectorz/Vector2.java
-import mikera.vectorz.Vector2;
 import java.util.Iterator;
-import vandy.cs251.EntityVisitor;
-import vandy.cs251.Spliterator;
 
+import edu.vanderbilt.a4_android.ui.EntityVisitor;
+import edu.vanderbilt.a4_android.ui.Spliterator;
+import mikera.vectorz.Vector2;
 
 class Universe implements Iterable<Entity> {
   /** A reference to the singleton instance of the Universe object. */
@@ -32,13 +31,13 @@ class Universe implements Iterable<Entity> {
    * Release the universe, so instance () will return a new Universe.
    */
   public static void release () {
-    // TODO: Fill in here, if necessary
+    // TODO: Fill in here, if necessary.
   }
 
   /**
    * Add a new entity to the simulation.
    */
-  public void addEntity(Entity ent) {
+  public void addEntity(SimpleEntity ent) {
     // TODO: Fill in here, if necessary
   }
 
@@ -52,12 +51,17 @@ class Universe implements Iterable<Entity> {
   /**
    * Get the identified entity.
    */
-  public Entity getEntity(String name) {
+  public SimpleEntity getEntity(String name) {
+    // TODO: Fill in here, if necessary
+  }
+
+  public Iterator<SimpleEntity> iterator () {
     // TODO: Fill in here, if necessary
   }
 
   class UniverseSpliterator implements Spliterator<Entity> {
-    // TODO: You will need to add constructor(s) and data member(s)
+    // TODO: Fill in here, if necessary
+
     public long estimateSize() {
       // TODO: Fill in here, if necessary
       return 0;
@@ -78,12 +82,7 @@ class Universe implements Iterable<Entity> {
    * Construct a spliterator covering the full range of all
    * entities in the simulation.
    */
-  public Spliterator spliterator () {
-    // TODO: Fill in here, if necessary
-    return null;
-  }
-
-  public Iterator<Entity> iterator () {
+  public Spliterator<Entity> spliterator () {
     // TODO: Fill in here, if necessary
     return null;
   }
@@ -100,13 +99,13 @@ class Universe implements Iterable<Entity> {
   /**
    * Calculates the force exerted on the 'base' by 'other'.
    */
-  public static Vector2 getForce (Entity base, Entity other) {
+  public static Vector2 getForce (SimpleEntity other, SimpleEntity base) {
     // To be provided, do not edit.
-    if (other.getPosition ().equals (base.getPosition ())) return new Vector2 ();
-    Vector2 direction = other.getPosition ().clone ();
-    direction.sub (base.getPosition ());
+    if (base.getPosition ().equals (other.getPosition ())) return new Vector2 ();
+    Vector2 direction = base.getPosition ().clone ();
+    direction.sub (other.getPosition ());
     Vector2 result = direction.toNormal ();
-    result.scaleAdd ((other.getMass () * base.getMass ()) / direction.magnitudeSquared (), 0);
+    result.scaleAdd ((base.getMass () * other.getMass ()) / direction.magnitudeSquared (), 0);
     result.scaleAdd (mGravitationalConstant, 0);
     return result;
   }
@@ -115,7 +114,7 @@ class Universe implements Iterable<Entity> {
    * Calculates the change in velocity of a given Entity given
    * a net force acting on the object.
    */
-  public static Vector2 calcVelocityDelta (Entity ent, Vector2 force) {
+  public static Vector2 calcVelocityDelta (ImmobileEntity ent, Vector2 force) {
     // To be provided, do not edit.
     Vector2 result = force.clone ();
     result.scaleAdd (1/ent.getMass (), 0);
