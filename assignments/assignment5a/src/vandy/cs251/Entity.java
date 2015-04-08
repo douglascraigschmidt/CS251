@@ -99,4 +99,11 @@ public class Entity {
   public void accept (EntityVisitor visitor) {
     // TODO: Fill in here, if necessary
   }
+
+  /** Create a string representation of this entity. */
+  public String toString () {
+    return String.format ("[%s] [%e] [%e,%e] [%e,%e]",
+                         getName(), getMass(), getVelocity().x,
+                         getVelocity().y, getPosition().x, getPosition().y);
+  }
 }

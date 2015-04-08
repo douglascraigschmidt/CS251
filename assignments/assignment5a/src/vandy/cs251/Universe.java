@@ -78,7 +78,7 @@ class Universe implements Iterable<Entity> {
    * Construct a spliterator covering the full range of all
    * entities in the simulation.
    */
-  public Spliterator spliterator () {
+  public Spliterator<Entity> spliterator () {
     // TODO: Fill in here, if necessary
     return null;
   }
