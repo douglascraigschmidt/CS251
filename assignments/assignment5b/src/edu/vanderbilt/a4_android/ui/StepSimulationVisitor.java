@@ -36,9 +36,4 @@ public class StepSimulationVisitor implements EntityVisitor {
   public void visit(AggregateEntity entity) {
     // TODO: Fill in here, if necessary.
   }
-
-  @Override
-  public void apply () {
-    // TODO: Fill in here, if necessary.
-  }
 }

@@ -53,10 +53,12 @@ class Universe implements Iterable<Entity> {
    */
   public SimpleEntity getEntity(String name) {
     // TODO: Fill in here, if necessary
+	return null;
   }
 
-  public Iterator<SimpleEntity> iterator () {
+  public Iterator<Entity> iterator () {
     // TODO: Fill in here, if necessary
+	return null;
   }
 
   class UniverseSpliterator implements Spliterator<Entity> {

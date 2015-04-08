@@ -68,13 +68,16 @@ public class AggregateEntity implements Entity {
   @Override
   public double getMass() {
     // TODO: Fill in here, if necessary
-    return null;
+    return 0;
   }
 
   /** Return the velocity of this entity. */
   @Override
   public Vector2 getVelocity () {
     // TODO: Fill in here, if necessary
+    // The average velocity is computed as the sum of:
+    //    member_velocity * member_mass
+    // That sum should then be divided by the total mass in the aggregate.
     return null;
   }
 
@@ -82,6 +85,10 @@ public class AggregateEntity implements Entity {
   @Override
   public Vector2 getPosition () {
     // TODO: Fill in here, if necessary
+    // The position is defined as the center of mass of the aggregate.
+    // This is calculated as the sum of:
+    //  member_position * member_mass
+    // That sum is divided by the total mass of the system.
     return null;
   }
 
@@ -91,7 +98,7 @@ public class AggregateEntity implements Entity {
 
   public StepStrategy getStrategy () {
     // TODO: Fill in here, if necessary
-    return null
+    return null;
   }
   
   public class Memento implements Entity.Memento {
@@ -111,7 +118,6 @@ public class AggregateEntity implements Entity {
     @Override
     public void apply() {
       // TODO: Fill in here, if necessary
-		
     }
 	  
   }
@@ -125,5 +131,14 @@ public class AggregateEntity implements Entity {
   @Override
   public void accept(EntityVisitor visitor) {
     // TODO: Fill in here, if necessary
+  }
+
+  public String toString () {
+    String ret = "[%s] [AGGREGATE] {\n";
+
+    // TODO: Loop through the entities and add them to the ret string.
+
+    return ret + "\n}";
+    
   }
 }
