@@ -10,7 +10,7 @@ public class AggregateEntity implements Entity {
    * Interface for strategeies that influence how this entity is processed for simulation steps.
    */
   public interface StepStrategy {
-    public void stepSimulation(AggregateEntity ent, double seconds);
+    public ArrayList<AggregateEntity.Memento> stepSimulation(AggregateEntity ent, double seconds);
   }
 
   /** The update strategy used by this entity. */

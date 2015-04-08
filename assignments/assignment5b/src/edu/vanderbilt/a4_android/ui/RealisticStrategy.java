@@ -1,5 +1,7 @@
 package edu.vanderbilt.a4_android.ui;
 
+import java.util.ArrayList;
+
 public class RealisticStrategy implements AggregateEntity.StepStrategy {
   /**
    * Update the position and velocity of the aggregate entity in a realistic manner,
@@ -7,7 +9,8 @@ public class RealisticStrategy implements AggregateEntity.StepStrategy {
    */
 
   @Override
-  public void stepSimulation(AggregateEntity ent, double seconds) {
+  public ArrayList<AggregateEntity.Memento> stepSimulation(AggregateEntity ent, double seconds) {
     // TODO: Fill in here, if necessary
+	return null;
   }
 }
