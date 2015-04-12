@@ -37,7 +37,7 @@ class Universe implements Iterable<Entity> {
   /**
    * Add a new entity to the simulation.
    */
-  public void addEntity(SimpleEntity ent) {
+  public void addEntity(Entity ent) {
     // TODO: Fill in here, if necessary
   }
 
@@ -101,7 +101,7 @@ class Universe implements Iterable<Entity> {
   /**
    * Calculates the force exerted on the 'base' by 'other'.
    */
-  public static Vector2 getForce (SimpleEntity other, SimpleEntity base) {
+  public static Vector2 getForce (Entity other, Entity base) {
     // To be provided, do not edit.
     if (base.getPosition ().equals (other.getPosition ())) return new Vector2 ();
     Vector2 direction = base.getPosition ().clone ();
@@ -116,7 +116,7 @@ class Universe implements Iterable<Entity> {
    * Calculates the change in velocity of a given Entity given
    * a net force acting on the object.
    */
-  public static Vector2 calcVelocityDelta (ImmobileEntity ent, Vector2 force) {
+  public static Vector2 calcVelocityDelta (Entity ent, Vector2 force) {
     // To be provided, do not edit.
     Vector2 result = force.clone ();
     result.scaleAdd (1/ent.getMass (), 0);

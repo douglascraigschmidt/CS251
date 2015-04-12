@@ -9,7 +9,7 @@ public class RealisticStrategy implements AggregateEntity.StepStrategy {
    */
 
   @Override
-  public ArrayList<AggregateEntity.Memento> stepSimulation(AggregateEntity ent, double seconds) {
+  public ArrayList<Entity.Memento> stepSimulation(AggregateEntity ent, double seconds) {
     // TODO: Fill in here, if necessary
 	return null;
   }

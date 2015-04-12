@@ -8,7 +8,7 @@ public class RigidStrategy implements AggregateEntity.StepStrategy {
    * treating the aggregate as a single object.
    */
   @Override
-  public ArrayList<AggregateEntity.Memento> stepSimulation(AggregateEntity ent, double seconds) {
+  public ArrayList<Entity.Memento> stepSimulation(AggregateEntity ent, double seconds) {
     // TODO: Fill in here, if necessary
 	  return null;
   }
