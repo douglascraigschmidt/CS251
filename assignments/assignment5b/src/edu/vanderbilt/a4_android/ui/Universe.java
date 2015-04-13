@@ -51,7 +51,7 @@ class Universe implements Iterable<Entity> {
   /**
    * Get the identified entity.
    */
-  public SimpleEntity getEntity(String name) {
+  public Entity getEntity(String name) {
     // TODO: Fill in here, if necessary
 	return null;
   }
