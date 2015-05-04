@@ -13,8 +13,10 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 /**
- * This MusicService uses a MediaPlayer to download and play a song in
- * the background.
+ * This MusicService extends Service and uses a MediaPlayer to
+ * download and play a song in the background.  Although it runs in
+ * the UI Thread, it implements MediaPlayer.OnPreparedListener to
+ * avoid blocking the UI Thread while a song is initially streamed.
  */
 public class MusicService extends Service 
                           implements MediaPlayer.OnPreparedListener {
@@ -23,6 +25,9 @@ public class MusicService extends Service
      */
     private String TAG = getClass().getSimpleName();
 
+    /**
+     * Intent used to start the Service.
+     */
     private static String ACTION_PLAY = "course.examples.action.PLAY";
 
     /**
@@ -44,7 +49,9 @@ public class MusicService extends Service
         // Create and return an intent that points to the
         // MusicService.
         return new Intent(ACTION_PLAY,
-                          Uri.parse(songURL));
+                          Uri.parse(songURL),
+                          context,
+                          MusicService.class);
     }
 
     /**
@@ -67,7 +74,8 @@ public class MusicService extends Service
     }
 
     /**
-     * Hook method called every time the MusicService is started.
+     * Hook method called every time startService() is called with an
+     * Intent associated with this MusicService.
      */
     @Override
     public int onStartCommand (Intent intent,

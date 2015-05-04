@@ -23,12 +23,6 @@
 
     <service
        android:name=".MusicService"> 
-       <intent-filter>
-         <action android:name="course.examples.action.PLAY" />
-         <category android:name="android.intent.category.DEFAULT" />
-         <data android:scheme="http" />
-         <data android:scheme="https" />
-       </intent-filter>
     </service>
   </application>
 

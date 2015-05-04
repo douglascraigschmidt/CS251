@@ -50,7 +50,7 @@ public class MusicActivity extends Activity {
         // Set the default layout.
         setContentView(R.layout.main);
 
-        // Cache the EditText resource. 
+        // Store the EditText resource. 
         mUrlEditText = 
             (EditText) findViewById(R.id.mUrlEditText);
     }
@@ -79,7 +79,6 @@ public class MusicActivity extends Activity {
             mMusicServiceIntent = null;
         } else
             showToast("no song is currently playing");
-
     }	
 
     /**
