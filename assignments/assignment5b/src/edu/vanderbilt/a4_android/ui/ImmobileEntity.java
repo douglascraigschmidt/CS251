@@ -28,7 +28,7 @@ public class ImmobileEntity implements Entity{
   /** Return the mass of this entity. */
   public double getMass() {
     // TODO: Fill in here, if necessary
-    return null;
+    return 0;
   }
 
   public Vector2 getVelocity () {
@@ -38,6 +38,7 @@ public class ImmobileEntity implements Entity{
 
   public Vector2 getPosition () {
     // TODO: Fill in here, if necessary
+	return null;
   }
 
   public class Memento implements Entity.Memento {
@@ -63,5 +64,12 @@ public class ImmobileEntity implements Entity{
 
   public void accept(EntityVisitor visitor) {
     // TODO: Fill in here, if necessary
+  }
+
+  /** Create a string representation of this entity. */
+  public String toString () {
+    return String.format ("[%s] [IMMOBILE] [%e] [%e,%e]",
+                         getName(), getMass(), getVelocity().x,
+                         getVelocity().y, getPosition().x, getPosition().y);
   }
 }

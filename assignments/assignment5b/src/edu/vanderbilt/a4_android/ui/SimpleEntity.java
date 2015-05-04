@@ -80,4 +80,11 @@ public class SimpleEntity extends ImmobileEntity {
   public void accept (EntityVisitor visitor) {
     // TODO: Fill in here, if necessary
   }
+
+  public String toString () {
+
+	  return String.format ("[%s] [SIMPLE] [%e] [%e,%e] [%e,%e]",
+			  getName(), getMass(), getVelocity().x,
+			  getVelocity().y, getPosition().x, getPosition().y);
+  }
 }
