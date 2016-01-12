@@ -1,6 +1,6 @@
 <html>
 
-<title>Array (Assignment 1)</title>
+<title>List (Assignment 1)</title>
 
 <body text = "#000000"
       link="#000fff"
@@ -8,7 +8,7 @@
       bgcolor="#ffffff">
 
   <hr>
-  <h3>Array (Assignment 1)</h3>
+  <h3>List (Assignment 1)</h3>
 
   <h4>Getting Started</h4>
 
@@ -19,25 +19,23 @@
 
   <ul>
     <li>
-      Download and install Eclipse Luna for Android. Instructions for
-      doing this are available <a href="https://vanderbilt.coursera.org/cs251-001/wiki/Installing_and_Using_Eclipse_and_Git">here</a>.
+      Download and install IntelliJ IDEA. 
     </li>
 
     <li>
-      Setup an account on <a href="https://about.gitlab.com/">GitLab</a>, which is explained in a
-      video by Mike Walker.
+      Setup an account on <a href="https://gitlab.com/">Gitlab</a>.  Please follow directions
+      <a href="https://github.com/douglascraigschmidt/CS251/wiki/InstallingSoftware">here</a>.
     </li>
   </ul>
 
   <hr width=50% align=left>
-  <h4>Overview of the Array Assignment</h4>
+  <h4>Overview of the List Assignment</h4>
 
   <p>
-    The purpose of this assignment is to give you experience using Eclipse
-    to develop a simple Java Array class.  An Array is an abstract data
+    The purpose of this assignment is to give you experience using IntelliJ
+    to develop a simple Java List class.  An List is an abstract data
     type (ADT) with operations such as get(), get(), and size(). Your task
-    is to implement an array of characters in Java.  This array will be
-    different from Java built-in arrays since it can be resized.
+    is to implement a list of characters in Java.
   </p>
   <p>
     Graduate students (or students who are taking this course for graduate
@@ -47,17 +45,25 @@
     <li>Implement the requirements of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> interface.
 
   </ul>
-
+  <!--
   <p>
     As much as possible, you should avoid using loops in this assignment.  In our solution, we only needed to use an explicit looping construct once.
   </p>
+  -->
 
+  <p>
+    As an implementation node, it may be helpful to assume that there
+    is a 'dummy node' present in the list to limit the number of
+    special cases in your code.  The dummy node is a node that appears
+    (usually) at the head of the list and is present event if the list
+    is 'empty.'
+  </p>
+  
   <p>
     The following resources may be helpful in completing this assignment:
   </p>
 
   <ul>
-    <li><a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html">java.utils.Arrays documentation.</a></li>
     <li><a href="http://docs.oracle.com/javase/tutorial/">The Oracle Java Tutorial</a></li>
   </ul>
 
@@ -66,36 +72,24 @@
 
   <p>
     Skeleton code for this assignment is available
-    <a href="https://github.com/douglascraigschmidt/CS251/tree/master/assignments/assignment1/">here</a>
-    account.  Once you've setup your <a href="https://about.gitlab.com/">GitLab</a> account you can pull this
+    <a href="https://https://github.com/douglascraigschmidt/CS251/">here</a>
+    account.  Once you've setup your <a href="https://gitlab.com/">Gitlab</a> account you can pull this
     skeleton code in your repository, read it carefully, and complete the
     "TODO" markers.
-  </p>
-
-  <p>
-    You may choose to use <a href="https://www.gradle.org">Gradle</a>
-    to build your solution.  This tool will both compile <b>and</b>
-    test your solution.
-  </p>
-
-  <p>
-    Note that the unit tests for this assignment are currently
-    incomplete, a revised test suite will be distributed later this
-    week.
   </p>
 
   <p>
     If you are an undergraduate student please use the shells that are in
     the <code>ugrad</code> directory at the URL above.  If you are a
     graduate student please use the shells that are in the
-    <code>grad</code> directory at the URL above.
+    <code>grad</code> directory at the URL above.  
   </p>
 
   <hr width=50% align=left>
   <h4>Concluding Remarks</h4>
   <p>
     This assignment is intentionally designed to be easy to help you get
-    familiar with installing/using Eclipse and Java.  If you find it
+    familiar with installing/using IntelliJ and Java.  If you find it
     extremely hard to complete this assignment you may not be ready to
     take this class.  If this is the case, please meet with me ASAP to
     discuss.
