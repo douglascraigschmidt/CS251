@@ -58,8 +58,8 @@ public class ServerInputHandler extends HttpServlet {
      * commands.
      */
     @Override
-	protected void doGet(HttpServletRequest request,
-                             HttpServletResponse response) throws ServletException, IOException {		
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {		
         // Retrieves input from user.
         String userInputCommand = request.getParameter("input");
 
