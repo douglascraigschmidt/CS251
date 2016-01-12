@@ -8,6 +8,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="org.junit:com.springsource.org.junit:4.11.0" level="project" />
+    <orderEntry type="library" name="junit:junit:4.11" level="project" />
   </component>
 </module>
