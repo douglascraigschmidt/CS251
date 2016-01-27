@@ -60,11 +60,11 @@ public class ListArrayCharacterTest {
         assertEquals(0, tmp_c.compareTo(tmp));
         assertFalse(tmp.capacity() == tmp_c.capacity());
 
-        tmp_c.resize (11);
+        tmp_c.resize(11);
 
         assertEquals('b', (char) tmp_c.get(10));
 
-        tmp_c.resize (2);
+        tmp_c.resize(2);
 
         tmp = new ListArray<Character>(tmp_c);
         assertEquals(tmp.size(), tmp_c.size());
@@ -72,27 +72,6 @@ public class ListArrayCharacterTest {
         assertEquals(0, tmp_c.compareTo(tmp));
         assertEquals(2, tmp.capacity());
     }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    public void test_Clone() {
-        ListArray<Character> tmp = new ListArray<Character>(10, 'b');
-        ListArray<Character> tmp_c = (ListArray<Character>) tmp.clone ();
-
-        assertEquals(tmp.size(), tmp_c.size());
-        assertEquals(0, tmp.compareTo(tmp_c));
-        assertEquals(0, tmp_c.compareTo(tmp));
-
-        tmp.resize(5);
-
-        tmp_c = (ListArray<Character>) tmp.clone ();
-
-        assertEquals(tmp.size(), tmp_c.size());
-        assertEquals(0, tmp.compareTo(tmp_c));
-        assertEquals(0, tmp_c.compareTo(tmp));
-        assertFalse(tmp.capacity() == tmp_c.capacity());
-    }
-
 
     @Test
     public void test_SetGet() {
@@ -226,8 +205,9 @@ public class ListArrayCharacterTest {
         assertTrue (a.compareTo(b) < 0);
         assertTrue (b.compareTo(a) > 0);
 
-        @SuppressWarnings("unchecked")
-        ListArray<Character> bba = (ListArray<Character>) b.clone ();
+            @SuppressWarnings("unchecked")
+            ListArray<Character> bba = new ListArray<Character>(b);
+
 
         assertEquals (0, b.compareTo (bba));
 
@@ -260,7 +240,9 @@ public class ListArrayCharacterTest {
         a.set (1, 'b');
         a.set (2, 'c');
 
-        b = (ListArray<Character>) a.clone ();
+
+        b = new ListArray<Character> (a);
+
         b.resize (4);
         b.set (3, 'd');
 

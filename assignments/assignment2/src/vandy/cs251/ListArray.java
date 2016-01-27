@@ -9,8 +9,7 @@ import java.util.NoSuchElementException;
  */
 public class ListArray<T extends Comparable<T>>
              implements Comparable<ListArray<T>>,
-                        Iterable<T>,
-                        Cloneable {
+                        Iterable<T> {
     /**
      * The underlying list of type T.
      */
@@ -33,7 +32,7 @@ public class ListArray<T extends Comparable<T>>
      *         negative.
      */
     @SuppressWarnings("unchecked")
-    public ListArray(int size) {
+    public ListArray(int size) throws NegativeArraySizeException {
         // TODO - you fill in here.
     }
 
@@ -46,7 +45,7 @@ public class ListArray<T extends Comparable<T>>
      *         negative.
      */
     public ListArray(int size,
-                     T defaultValue) {
+                     T defaultValue) throws NegativeArraySizeException {
         // TODO - you fill in here.
     }
 
@@ -57,17 +56,6 @@ public class ListArray<T extends Comparable<T>>
     public ListArray(ListArray<T> s) {
         // TODO - you fill in here.
 
-    }
-
-    /**
-     * Creates a deep copy of this ListArray.  Implements the
-     * Prototype pattern.
-     */
-    @Override
-    public Object clone() {
-        // TODO - you fill in here (replace null with proper return
-        // value).
-        return null;
     }
 
     /**
