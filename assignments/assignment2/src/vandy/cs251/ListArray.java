@@ -68,25 +68,9 @@ public class ListArray<T extends Comparable<T>>
     }
 
     /**
-     * @return The current maximum capacity of the array withough
-     */
-    public int capacity() {
-        // TODO - you fill in here (replace 0 with proper return
-        // value).
-        return 0;
-    }
-
-    /**
      * Resizes the array to the requested size.
      *
-     * Changes the capacity of this array to hold the requested number of elements.
-     * Note the following optimizations/implementation details:
-     * <ul>
-     *   <li> If the requests size is smaller than the current maximum capacity, new memory
-     *   is not allocated.
-     *   <li> If the array was constructed with a default value, it is used to populate
-     *   uninitialized fields in the array.
-     * </ul>
+     * Changes the size of this ListArray to hold the requested number of elements.
      * @param size Nonnegative requested new size.
      */
     public void resize(int size) {
