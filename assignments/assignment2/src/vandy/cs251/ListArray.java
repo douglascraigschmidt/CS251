@@ -100,6 +100,10 @@ public class ListArray<T extends Comparable<T>>
         // TODO - you fill in here.
     }
 
+    private Node seek(int index) {
+        // TODO - you fill in here.
+    }
+
     /**
      * Removes the element at the specified position in this ListArray.
      * Shifts any subsequent elements to the left (subtracts one from their
