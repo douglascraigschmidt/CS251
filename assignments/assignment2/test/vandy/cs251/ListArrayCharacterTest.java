@@ -2,13 +2,11 @@ package vandy.cs251;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-import java.util.ArrayList;
-import java.util.ListIterator;
-import static org.junit.Assert.*;
 
-import java.util.Iterator;
+import java.util.*;
+import java.util.function.Consumer;
+
+import static org.junit.Assert.*;
 
 /**
  * Test the ListArray<Character> class.
@@ -281,7 +279,7 @@ public class ListArrayCharacterTest {
         assertTrue (it.next () == 'b');
         assertTrue (it.hasNext () == false);
 
-        exception.expect(ArrayIndexOutOfBoundsException.class);
+        exception.expect(NoSuchElementException.class);
         it.next ();
     }
 
