@@ -102,6 +102,7 @@ public class ListArray<T extends Comparable<T>>
 
     private Node seek(int index) {
         // TODO - you fill in here.
+        return null;
     }
 
     /**
