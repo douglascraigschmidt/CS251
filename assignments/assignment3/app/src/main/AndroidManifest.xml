@@ -15,5 +15,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+	
+	<activity 
+	    android:name=".DownloadImageActivity"
+	    android:theme="@android:style/Theme.NoTitleBar">
+	  <intent-filter>
+            <action android:name="vandy.cs251.action.DOWNLOAD_IMAGE" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:scheme="http" />
+            <data android:scheme="https" />
+	  </intent-filter>
+	</activity>
+	
     </application>
 </manifest>
