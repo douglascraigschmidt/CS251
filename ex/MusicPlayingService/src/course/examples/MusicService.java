@@ -82,7 +82,7 @@ public class MusicService extends Service
                                int flags,
                                int startid) {
         // Extract the URL for the song to play.
-        String songURL = intent.getDataString();
+        final String songURL = intent.getDataString();
 
         Log.i(TAG,
               "onStartCommand() entered with song URL "
