@@ -141,7 +141,7 @@ public class ImagePresenter
     /**
      * Hook method called to shutdown the Presenter layer.
      *
-     * @param isChangeConfigurations
+     * @param isChangingConfigurations
      *        True if a runtime configuration triggered the onDestroy() call.
      */
     @Override
@@ -249,6 +249,8 @@ public class ImagePresenter
                 // Display the results.
                 mImageView.get().displayResults(mDirectoryPathname);
             }
+        } else {
+            Log.d(TAG, "All Downloads not complete");
         }
     }  
 
