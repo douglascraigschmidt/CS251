@@ -11,7 +11,8 @@ import android.widget.Toast;
  * This MusicActivity is a simple front-end to the MusicService, which
  * plays a song in the background.
  */
-public class MusicActivity extends Activity {
+public class MusicActivity 
+       extends Activity {
     /**
      * Debug Tag for logging debug output to LogCat
      */

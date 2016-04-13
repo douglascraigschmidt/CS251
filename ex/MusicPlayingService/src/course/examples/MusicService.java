@@ -23,12 +23,13 @@ public class MusicService extends Service
     /**
      * Debugging tag used by the Android logger.
      */
-    private String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
 
     /**
      * Intent used to start the Service.
      */
-    private static String ACTION_PLAY = "course.examples.action.PLAY";
+    private final static String ACTION_PLAY =
+        "course.examples.action.PLAY";
 
     /**
      * Keep track of whether a song is currently playing.
@@ -111,7 +112,8 @@ public class MusicService extends Service
     }
 
     /** 
-     * Called back when MediaPlayer is ready to play the song.
+     * Hook method called back when MediaPlayer is ready to play the
+     * song.
      */
     public void onPrepared(MediaPlayer player) {
         Log.i(TAG,"onPrepared() entered");
