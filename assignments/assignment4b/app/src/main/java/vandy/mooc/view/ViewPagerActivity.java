@@ -1,18 +1,12 @@
 package vandy.mooc.view;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import vandy.mooc.R;
-import vandy.mooc.utils.loader.ImageLoader;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,11 +15,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import vandy.mooc.R;
+import vandy.mooc.utils.loader.ImageLoader;
+
 /**
  * Displays a directory of Images in a ViewPager. Each image is
  * displayed fullscreen and the user can swipe to navigate to other
  * images.
- * 
+ *
  * @author Geoffrey
  */
 public class ViewPagerActivity extends FragmentActivity {
@@ -37,7 +38,7 @@ public class ViewPagerActivity extends FragmentActivity {
      * Class tag for Debugging
      */
     private static final String TAG =
-        ViewPagerActivity.class.getCanonicalName();
+            ViewPagerActivity.class.getCanonicalName();
 
     /**
      * Constant used to access the position of the current image
@@ -49,7 +50,7 @@ public class ViewPagerActivity extends FragmentActivity {
      * Name of the intent action that will start this Activity.
      */
     public static String ACTION_DISPLAY_IMAGES_SWIPE =
-        "android.intent.action.DISPLAY_IMAGES_SWIPE";
+            "android.intent.action.DISPLAY_IMAGES_SWIPE";
 
     /*
      * Data members.
@@ -76,12 +77,12 @@ public class ViewPagerActivity extends FragmentActivity {
      * The file path to the directory of images.
      */
     private String mFilePath;
-    
+
     /**
      * ImageLoader used to load the images in the background
      */
     private ImageLoader mLoader;
-    
+
     /**
      * The screen width that is used to scale the loaded bitmaps
      */
@@ -90,10 +91,10 @@ public class ViewPagerActivity extends FragmentActivity {
     /**
      * Factory method that returns an Intent for displaying Images in
      * a ViewPager
-     * 
+     *
      * @param directoryPathname
      *            Filepath storing images to display
-     * @param pos
+     * @param position
      *            Position of starting image
      * @return
      */
@@ -120,51 +121,51 @@ public class ViewPagerActivity extends FragmentActivity {
         Intent intent = getIntent();
 
         Log.v(TAG,
-              "2" 
-              + intent);
+                "2"
+                        + intent);
         Log.v(TAG,
-              "2" 
-              + intent.getData());
+                "2"
+                        + intent.getData());
 
         // If the intent exists and contains the filepath, extract its
         // data
         if (intent != null && intent.getData() != null) {
             mCurrentImage =
-                intent.getIntExtra(CURRENT_IMAGE_POSITION,
-                                   0);
+                    intent.getIntExtra(CURRENT_IMAGE_POSITION,
+                            0);
             mFilePath = intent.getData().getPath();
         }
         Log.v(TAG,
-              "mFilePath" 
-              + mFilePath);
+                "mFilePath"
+                        + mFilePath);
 
         // Set the content view.
         setContentView(R.layout.image_detail_swipe_activity);
-        
+
         // Find the screen's width
         DisplayMetrics displaymetrics =
-            new DisplayMetrics();
+                new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         mWidth = displaymetrics.widthPixels;
 
         // Initialize the pager adapter.
         File dirFile = new File(mFilePath);
         mImagePagerAdapter =
-            new ImagePagerAdapter(getFragmentManager(),
-                                  dirFile.listFiles());
+                new ImagePagerAdapter(getSupportFragmentManager(),
+                        dirFile.listFiles());
 
         // Initialize the ViewPager using the pager adapter
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mImagePagerAdapter);
         mViewPager.setCurrentItem(mCurrentImage);
-        Log.v(TAG, 
-              "first image #: " 
-              + mCurrentImage);
-        
+        Log.v(TAG,
+                "first image #: "
+                        + mCurrentImage);
+
         // Initialize the ImageLoader
         mLoader = new ImageLoader(getResources().getDrawable(R.drawable.loading));
     }
-    
+
     /**
      * Accesses the ImageLoader used by this activity.
      */
@@ -190,27 +191,24 @@ public class ViewPagerActivity extends FragmentActivity {
                                  File[] files) {
             super(fm);
             Log.v(TAG,
-                  "ImagePagerAdapter constructor()");
+                    "ImagePagerAdapter constructor()");
             mBitmapFiles =
-                new ArrayList<>(Arrays.asList(files));
+                    new ArrayList<>(Arrays.asList(files));
         }
 
-        /**
-         * Returns a fragment that displays the Bitmap at the
-         * requested position in the directory.
-         */
+
         @Override
-        public Fragment getItem(int position) {
+        public android.support.v4.app.Fragment getItem(int position) {
             Log.v(TAG,
-                  "getItem" 
-                  + position);
+                    "getItem"
+                            + position);
 
             mCurrentImage = position;
 
             // Create a new ImageDetailFragment holding the Image
             // stored at the File in the requested position.
             return ImageDetailFragment.newInstance
-                (mBitmapFiles.get(position));
+                    (mBitmapFiles.get(position));
         }
 
         /**
@@ -219,7 +217,7 @@ public class ViewPagerActivity extends FragmentActivity {
         @Override
         public int getCount() {
             Log.v(TAG,
-                  "ImagePagerAdapter getCount()");
+                    "ImagePagerAdapter getCount()");
             return mBitmapFiles.size();
         }
     }
@@ -250,7 +248,7 @@ public class ViewPagerActivity extends FragmentActivity {
             // Supply the file's path as an argument.
             Bundle args = new Bundle();
             args.putString("file",
-                           imageFile.getPath());
+                    imageFile.getPath());
             f.setArguments(args);
             return f;
         }
@@ -268,9 +266,9 @@ public class ViewPagerActivity extends FragmentActivity {
             // undergone an orientation change, or the newInstance()
             // method was used to create the fragment
             mImageFilePath =
-                getArguments() != null 
-                ? getArguments().getString("file")
-                : null;
+                    getArguments() != null
+                            ? getArguments().getString("file")
+                            : null;
         }
 
         /**
@@ -283,16 +281,16 @@ public class ViewPagerActivity extends FragmentActivity {
                                  Bundle savedInstanceState) {
             // Create the fragment's view from its corresponding layout file
             View rootView =
-                inflater.inflate(R.layout.fragment_collection_detail,
-                                 container,
-                                 false);
+                    inflater.inflate(R.layout.fragment_collection_detail,
+                            container,
+                            false);
 
             // Use the ImageLoader to load and display the bitmap
             ((ViewPagerActivity)getActivity())
-                .getImageLoader()
-                    .loadAndDisplayImage((ImageView)rootView.findViewById(R.id.img_view), 
-                                         mImageFilePath, 
-                                         mWidth);
+                    .getImageLoader()
+                    .loadAndDisplayImage((ImageView)rootView.findViewById(R.id.img_view),
+                            mImageFilePath,
+                            mWidth);
             return rootView;
         }
     }

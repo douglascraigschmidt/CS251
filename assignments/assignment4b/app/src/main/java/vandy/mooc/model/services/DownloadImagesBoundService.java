@@ -139,7 +139,7 @@ public class DownloadImagesBoundService
 		      "sending "
 		      + pathToImageFile
 		      + " back to the MainActivity");
-
+		throw new RemoteException(); // remove this
 		// Send the replyMessage back to the Activity.
 		// TODO -- you fill in here.
 	    } catch (RemoteException e) {
