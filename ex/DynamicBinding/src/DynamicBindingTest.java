@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.AbstractMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -12,63 +11,80 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DynamicBindingTest {
     /**
-     * Default Map to create.
-     */
-    private final static String sMapType = "HashMap";
-
-    /**
      * Superclass for the hierarchy.
      */
     public static abstract class SimpleAbstractMap<K, V> {
-        /**
-         * Concrete state.
-         */
-        protected AbstractMap<K, V> mMap;
-
-        /**
-         * Simple constructor initializes the field.
-         */
-        public SimpleAbstractMap(AbstractMap<K, V> map) {
-            mMap = map;
-        }
-
-        /**
-         * This is an abstract method - *must* be overridden by
-         * concrete subclasses.
-         */
+        // This is an abstract method - *must* be overridden by
+        // concrete subclasses.
         public abstract Set<Map.Entry<K, V>> entrySet();
 
-        /**
-         * This is a non-abstract method - *may* be overridden by
-         * concrete subclasses.
-         */
+        // This is a non-abstract method - *may* be overridden by
+        // concrete subclasses.
         public V put(K key, V value) {
             throw new UnsupportedOperationException();
         }
     }
 	
     /**
-     * Main entry point into the test program.
+     * One subclass in the hierarchy.
      */
-    public static void main(String[] args) {
-        // Factory method makes the appropriate type of Map subclass.
-        SimpleAbstractMap<String, Integer> map =
-            makeMap(args.length == 0 ? sMapType : args[0]);
+    public static class SimpleHashMap<K, V> extends SimpleAbstractMap<K, V> {
+        // Concrete state.
+        private HashMap<K, V> mMap = new HashMap<>();
 
-        // Add some elements to the Map.
-        map.put("I", 1);
-        map.put("am", 2); 
-        map.put("Ironman", 7);
+        // Override the superclass method.
+        public Set<Map.Entry<K, V>> entrySet() {
+            System.out.println("SimpleHashMap.entrySet()");
+            return mMap.entrySet();
+        }
 
-        // Print out the key/values pairs in the Map.
-        for (Map.Entry<String, Integer> s : map.entrySet())
-            System.out.println
-                ("key = "
-                 + s.getKey()
-                 + " value = "
-                 + s.getValue());
+        // Override the superclass method.
+        public V put(K key, V value) {
+            System.out.println("SimpleHashMap.put");
+            return mMap.put(key, value);
+        }
     }
+	
+    /**
+     * One subclass in the hierarchy.
+     */
+    public static class SimpleTreeMap<K, V> extends SimpleAbstractMap<K, V> {
+        // Concrete state.
+        private TreeMap<K, V> mMap = new TreeMap<>();
 
+        // Override the superclass method.
+        public Set<Map.Entry<K, V>> entrySet() {
+            System.out.println("SimpleTreeMap.entrySet()");
+            return mMap.entrySet();
+        }
+
+        // Override the superclass method.
+        public V put(K key, V value) {
+            System.out.println("SimpleTreeMap.put");
+            return mMap.put(key, value);
+        }
+    }
+	
+    /**
+     * One subclass in the hierarchy.
+     */
+    private static class SimpleConcurrentHashMap<K, V> extends SimpleAbstractMap<K, V> {
+        // Concrete state.
+        private ConcurrentHashMap<K, V> mMap = new ConcurrentHashMap<>();
+
+        // Override the superclass method.
+        public Set<Map.Entry<K, V>> entrySet() {
+            System.out.println("SimpleConcurrentHashMap.entrySet()");
+            return mMap.entrySet();
+        }
+
+        // Override the superclass method.
+        public V put(K key, V value) {
+            System.out.println("SimpleConcurrentHashMap.put()");
+            return mMap.put(key, value);
+        }
+    }
+	
     /**
      * Factory method that creates the designated @a mapType.
      */
@@ -82,94 +98,25 @@ public class DynamicBindingTest {
         else
             throw new IllegalArgumentException();
     }
-
-    /**
-     * One subclass in the hierarchy.
-     */
-    public static class SimpleHashMap<K, V> 
-           extends SimpleAbstractMap<K, V> {
-
-        /**
-         * Initialize concrete state.
-         */
-        public SimpleHashMap() {
-            super(new HashMap<K, V>());
-        }
-
-        /**
-         * Override the superclass method.
-         */
-        public Set<Map.Entry<K, V>> entrySet() {
-            System.out.println("SimpleHashMap.entrySet()");
-            return mMap.entrySet();
-        }
-
-        /**
-         * Override the superclass method.
-         */
-        public V put(K key, V value) {
-            System.out.println("SimpleHashMap.put");
-            return mMap.put(key, value);
-        }
-    }
 	
     /**
-     * One subclass in the hierarchy.
+     * Main entry point into the test program.
      */
-    public static class SimpleTreeMap<K, V> 
-           extends SimpleAbstractMap<K, V> {
+    public static void main(String[] args) {
+        // Factory method makes the appropriate type of Map subclass.
+        SimpleAbstractMap<String, Integer> map = makeMap(args[0]);
 
-        /**
-         * Initialize concrete state.
-         */
-        SimpleTreeMap() {
-            super (new TreeMap<K, V>());
-        }
+        // Add some elements to the Map.
+        map.put("I", 1);
+        map.put("am", 2); 
+        map.put("Ironman", 7);
 
-        /**
-         * Override the superclass method.
-         */
-        public Set<Map.Entry<K, V>> entrySet() {
-            System.out.println("SimpleTreeMap.entrySet()");
-            return mMap.entrySet();
-        }
-
-        /**
-         * Override the superclass method.
-         */
-        public V put(K key, V value) {
-            System.out.println("SimpleTreeMap.put");
-            return mMap.put(key, value);
-        }
-    }
-	
-    /**
-     * One subclass in the hierarchy.
-     */
-    private static class SimpleConcurrentHashMap<K, V> 
-            extends SimpleAbstractMap<K, V> {
-
-        /**
-         * Initialize concrete state.
-         */
-        public SimpleConcurrentHashMap() {
-            super(new ConcurrentHashMap<K, V>());
-        }
-
-        /**
-         * Override the superclass method.
-         */
-        public Set<Map.Entry<K, V>> entrySet() {
-            System.out.println("SimpleConcurrentHashMap.entrySet()");
-            return mMap.entrySet();
-        }
-
-        /**
-         * Override the superclass method.
-         */
-        public V put(K key, V value) {
-            System.out.println("SimpleConcurrentHashMap.put()");
-            return mMap.put(key, value);
-        }
+        // Print out the key/values pairs in the Map.
+        for (Map.Entry<String, Integer> s : map.entrySet())
+            System.out.println
+                ("key = "
+                 + s.getKey()
+                 + " value = "
+                 + s.getValue());
     }
 }

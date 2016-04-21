@@ -1,11 +1,15 @@
 package vandy.mooc;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.URLUtil;
@@ -25,6 +29,8 @@ public class MainActivity
      */
     private static final int DOWNLOAD_IMAGE_REQUEST = 1;
 
+    private static final int PERMISISION_CHECK_REQUEST = 2;
+		        
     /**
      * EditText field for entering the desired URL to an image.
      */
@@ -62,6 +68,7 @@ public class MainActivity
         // Always call super class for necessary
         // initialization/implementation.
         // TODO -- you fill in here.
+        super.onCreate(savedInstanceState);
 
         // Set the default layout.
         // TODO -- you fill in here.
@@ -69,6 +76,22 @@ public class MainActivity
         // Cache the EditText that holds the urls entered by the
         // user (if any).
         // TODO -- you fill in here.
+    }
+
+    @Override
+    protected void onResume() {
+	super.onResume();
+
+	// Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISISION_CHECK_REQUEST);
+
+        }
     }
 
     /**
