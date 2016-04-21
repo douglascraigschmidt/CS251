@@ -11,6 +11,8 @@ import vandy.mooc.common.GenericPresenter;
 import vandy.mooc.common.Utils;
 import vandy.mooc.model.ImageModel;
 import vandy.mooc.model.datamodel.ReplyMessage;
+import vandy.mooc.utils.GetPermissions;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -105,6 +107,9 @@ public class ImagePresenter
         // instance.
         super.onCreate(ImageModel.class,
                        this);
+
+        // added this because I suspect permissions problems
+        GetPermissions.requestPermissions(this.getActivityContext());
     }
 
     /**
