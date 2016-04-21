@@ -1,12 +1,12 @@
 package vandy.mooc.utils;
 
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -16,18 +16,24 @@ import android.widget.Toast;
  */
 public class GetPermissions {
     private static final int REQUEST_WRITE_STORAGE = 112;
-    boolean hasPermission;
+    private static boolean hasPermission;
 
     public static void requestPermissions(Context activity) {
-        boolean hasPermission = (
-                ContextCompat.checkSelfPermission(
-                        activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        ==
-                        PackageManager.PERMISSION_GRANTED
+        if (hasPermission) return;
+        
+        Log.d("GetPermissions", "requesting permissions");
+        // check if write_external_storage permissions have been granted
+        hasPermission = (
+                ContextCompat.checkSelfPermission(activity,
+                                                  Manifest
+                                                      .permission
+                                                      .WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED
         );
 
         Activity parentActivity = (Activity) activity;
 
+        // request permissions if they have not been granted
         if (!hasPermission) {
             ActivityCompat.requestPermissions(
                     parentActivity,
@@ -38,9 +44,11 @@ public class GetPermissions {
 
     }
 
-    public void onRequestPermissionsResult(Context parentActivity, int
-                                           requestCode, String[]
-            permissions, int[] grantResults) {
+    // some callback - currently unused
+    public static void onRequestPermissionsResult(Context parentActivity,
+                                                  int requestCode,
+                                                  String[] permissions,
+                                                  int[] grantResults) {
         switch (requestCode)
         {
             case REQUEST_WRITE_STORAGE: {
