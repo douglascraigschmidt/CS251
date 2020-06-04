@@ -1,4 +1,4 @@
-f// @author G. Hemingway, copyright 2018 - All rights reserved
+// @author G. Hemingway, copyright 2018 - All rights reserved
 //
 #ifndef SIMPLE_ARRAY_H
 #define SIMPLE_ARRAY_H
