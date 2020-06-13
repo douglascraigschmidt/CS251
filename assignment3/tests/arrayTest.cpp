@@ -231,13 +231,11 @@ TEST_F(ArrayListTest, Swap)
     EXPECT_EQ(a.size(), 10UL);
     EXPECT_EQ(b.size(), 20UL);
 
-    for (long i : a) {
-        EXPECT_EQ(i, 100L);
-    }
+    for (uint32_t i = 0; i < a.size(); ++i) 
+        EXPECT_EQ(a[i], 100L);
 
-    for (long i : b) {
-        EXPECT_EQ(i, 200L);
-    }
+    for (uint32_t i = 0; i < b.size(); ++i) 
+        EXPECT_EQ(b[i], 200L);
 }
 
 // Mix some adding and some removing
