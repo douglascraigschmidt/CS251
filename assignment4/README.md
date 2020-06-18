@@ -50,10 +50,10 @@ your guide for what the code must do.  Then review your code to ensure
 it is strongly exception safe and properly implements all the "Rule of
 5" methods.
 
-Also, please to create private helper methods to improve the
-modularity and reuse of your code.  Moreover, please use STL
-algorithms whenever possible, including (but not limited to) the STL
-_copy()_ and _fill()_ algorithms.
+Also, please create private helper methods to improve the modularity
+and reuse of your code.  Moreover, please use STL algorithms whenever
+possible, including (but not limited to) the STL _copy()_ and _fill()_
+algorithms.
 
 ## Reminders
 
