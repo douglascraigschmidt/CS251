@@ -2,10 +2,10 @@
 
 ## Programming Assignment 4
 
-This assignment builds on assignment #3 (which focused on strong
-exception safety and the "Rule of 5" methods) by adding support for
-iterators to your ArrayList implementation.  As always, you have been
-provided with several source files to start with:
+This assignment builds on assignment #3 (which focused on exception
+safety and the "Rule of 5" methods) by adding support for iterators to
+your ArrayList implementation.  As always, you have been provided with
+several source files to start with:
 
 * `include/ArrayList.h`
 * `include/ArrayListIter.h`
@@ -28,10 +28,10 @@ Do not modify any of the build & test files.
 The files _ArrayList.h_ and _ArrayListIter.h_ contain comments that
 specify the class's functionality. Your task is to implement all of
 the classes and methods declared in _ArrayList.h_ and
-_ArrayListIter.h_ in a **strongly-exception** safe manner. You should
-copy your _ScopedArray.h_ and _ScopedArray.cpp_ files from the
-previous assignment into the _include_ and _src_ directors,
-respectively, so make sure that it works properly
+_ArrayListIter.h_ in an **exception-safe** manner. You should copy
+your _ScopedArray.h_ and _ScopedArray.cpp_ files from the previous
+assignment into the _include_ and _src_ directors, respectively, so
+make sure that it works properly
 
 The assignment is to be submitted using the link to github.com sent
 out via email to all class members. DO NOT email your assignment to
@@ -47,8 +47,8 @@ _include/ArrayList.h_ and _include/ArrayListIter.h_ files.  Read
 through the files carefully, and study the test cases defined in
 _tests/arrayTest.cpp_ and _tests/arrayIterTest.cpp_.  These will be
 your guide for what the code must do.  Then review your code to ensure
-it is strongly exception safe and properly implements all the "Rule of
-5" methods.
+it is exception safe and properly implements all the "Rule of 5"
+methods.
 
 Also, please create private helper methods to improve the modularity
 and reuse of your code.  Moreover, please use STL algorithms whenever
