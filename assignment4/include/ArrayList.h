@@ -141,19 +141,6 @@ public:
     iterator end();
 
     /**
-     * Returns const iterator to the beginning; in this case, a random access
-     * iterator
-     * @return an const iterator to the beginning of this ArrayList.
-     */
-    const_iterator begin() const;
-
-    /**
-     * Returns the past-the-end const iterator of this ArrayList.
-     * @return a past-the-end const iterator of this ArrayList.
-     */
-    const_iterator end() const;
-
-    /**
      * Removes an element at the specified location from this ArrayList and
      * returns it. Elements following index are shifted down. If index is out of
      * range, std::out_of_range is thrown with index as its message.
