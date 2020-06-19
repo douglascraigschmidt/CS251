@@ -44,11 +44,24 @@ public:
     ArrayList(const ArrayList<T>& src);
 
     /**
+     * Performs move constructor semantics on the provided ArrayList
+     * @param src ArrayList to move
+     */
+    ArrayList(ArrayList<T>&& src) noexcept;
+
+    /**
      * Makes *this a deep copy of the provided ArrayList.
      * @param src ArrayList to copy
      * @return *this for chaining
      */
     ArrayList<T>& operator=(const ArrayList<T>& src);
+
+    /**
+     * Performs move assignment semantics on the provided ArrayList.
+     * @param src ArrayList to move
+     * @return *this for chaining
+     */
+    ArrayList<T>& operator=(ArrayList<T>&& src) noexcept;
 
     /**
      * Adds the provided element to the end of this ArrayList.  If the ArrayList needs to be
@@ -161,7 +174,13 @@ public:
      * Returns the size of this ArrayList.
      * @return the size of this ArrayList.
      */
-    uint32_t size() const;
+    [[nodiscard]] uint32_t size() const;
+
+    /**
+     * Perform an exception-safe swap of the contents of *this with
+     * src.
+     */
+    void swap(ArrayList<T> &src) noexcept;
 
 private:
     /**
