@@ -6,7 +6,6 @@
 #include <string>
 
 /**
- *
  *  A class representing a 2-dimensional vector of doubles. Common
  *  vector operations are implemented in a loop-free manner to
  *  encourage use of functors, lambda expressions and STL algorithms.
