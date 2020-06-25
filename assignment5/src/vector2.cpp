@@ -47,10 +47,7 @@ vector2 vector2::add(const vector2& rhs) const
     vector2 sum;
 
     // TODO -- you fill in here to use the std::transform() method to
-    // compute the sum of this vector and rhs.  
-
-    // Either the functor approach -- currently commented out -- or the lambda approach is fine
-    // std::transform(begin(), end(), rhs.begin(), sum.begin(), adder());
+    // compute the sum of this vector and rhs.
 }
 
 /**
@@ -64,8 +61,6 @@ vector2 vector2::scale(const double& rhs) const
   // scale a copy of this vector by rhs into s and return s.
 
   // Either the functor approach -- currently commented out -- or the lambda approach is fine
-  // Via a binder, we can reuse multiplier with a transform
-  // std::transform(begin(), end(), s.begin(), std::bind2nd(multiplier(), rhs));
 }
 
 /**
@@ -79,8 +74,6 @@ double vector2::dot(const vector2& rhs) const
   // transform will return the output iterator. Therefore, I hacked together
   // an iterator that will actually accumulate the values that are "assigned
   // to its content."
-  // return std::transform(begin(), end(), rhs.begin(), accumulator_iter(),
-  // multiplier()).accumulator;
   double product = 0.0;
   vector2 outVec;
 }
@@ -232,22 +225,22 @@ vector2 vector2::operator*(const double& rhs) const
 
 double* vector2::begin()
 {
-  return std::begin(mData);
+
 }
 
 const double* vector2::begin() const
 {
-  return std::begin(mData);
+
 }
 
 double* vector2::end()
 {
-  return std::end(mData);
+
 }
 
 const double* vector2::end() const
 {
-  return std::end(mData);
+
 }
 
 /**

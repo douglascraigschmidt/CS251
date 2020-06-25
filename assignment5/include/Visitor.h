@@ -38,7 +38,7 @@ public:
   /**
    *  Prints the object's name.
    */
-  virtual void visit(Object& object);
+  void visit(Object& object) override;
 
 private:
   /**

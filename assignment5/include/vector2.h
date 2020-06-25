@@ -26,7 +26,7 @@ public:
   vector2(const vector2& rhs) noexcept = default;
 
   /**
-   *  Creates a vector using the first DIM values starting at ptr.
+   *  Creates a vector using the first 2 values starting at ptr.
    */
   explicit vector2(const double* ptr) noexcept;
 

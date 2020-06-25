@@ -22,7 +22,7 @@ public:
   static constexpr double G = 6.67428e-11;
 
   /**
-   *  Returns the only instance of the Universe
+   *  Returns the one and only instance of the Universe.
    */
   static Universe* instance();
 
@@ -65,7 +65,7 @@ public:
    * the Universe. This should be used as the source of data for
    * computing the next step in the simulation
    */
-  ArrayList<Object*> getSnapshot() const;
+  [[nodiscard]] ArrayList<Object*> getSnapshot() const;
 
   /**
    * Advances the simulation by the provided time step. For this
