@@ -1,5 +1,5 @@
 # CS 3251: Intermediate Software Design
-## Programming Assignment 6
+## Programming Assignment 5
 
 ## Overview
 
