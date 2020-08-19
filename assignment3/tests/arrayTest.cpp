@@ -271,7 +271,7 @@ TEST_F(ArrayListTest, Clear)
     ArrayList<long> a(20, 100L);
     a.clear();
     EXPECT_TRUE(a.isEmpty());
-    EXPECT_EQ(a.add(1), 1L);
+    EXPECT_EQ(a.add(1), 1UL);
     a.clear();
     EXPECT_THROW({ a.remove(0); }, std::out_of_range);
 
