@@ -137,7 +137,7 @@ private:
     friend class ArrayList<T>;
 
     template <typename X>
-    ArrayListIterator<X> operator+(int offset, const ArrayListIterator<X>& iter);
+    friend ArrayListIterator<X> operator+(int offset, const ArrayListIterator<X>& iter);
 
     /**
      * Pointer to the actual element.
