@@ -1,0 +1,39 @@
+language: cpp
+sudo: false
+services:
+  - docker
+
+matrix:
+  allow_failures:
+    # To allow a build matrix entry to fail, add this key to said entry.
+    - custom_allow_failures: true
+
+  include:
+    - os: linux
+      env:
+        - KEY=linter
+    - os: linux
+      env:
+        - KEY=clang MATRIX_EVAL="CC=clang-8 && CXX=clang++-8"
+    - os: linux
+      env:
+        - KEY=gcc MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+
+before_install:
+  # Setup the container
+  - docker pull nashtrash/isd-base
+  # Setup the build environment variables
+  - eval "${MATRIX_EVAL}"
+  # Start the container
+  - docker run -itd -e CC -e CXX --name build nashtrash/isd-base
+  # Copy repo and deps over
+  - docker cp . build:/repo
+
+script:
+  - . .travis.sh
+
+after_success:
+  - echo "Yay! Your code passed this test."
+
+after_failure:
+  - echo "Uh-oh - something is wrong with your code!"
